@@ -21,7 +21,6 @@ private $zoom       = 16;
 
 function __construct()
 {
-    add_action("wp_enqueue_scripts", array(&$this, "wp_enqueue_scripts"));
     add_shortcode('simple-map', array(&$this, 'shortcode'));
 }
 
@@ -50,6 +49,8 @@ public function wp_enqueue_scripts()
 
 public function shortcode($p)
 {
+    add_action("wp_footer", array(&$this, "wp_enqueue_scripts"));
+
     if (isset($p['width']) && preg_match("/^[0-9]+(%|px)$/", $p['width'])) {
         $w = $p['width'];
     } else {
