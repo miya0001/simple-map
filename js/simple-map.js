@@ -35,12 +35,14 @@ function display(element, pos, zoom) {
         var img = $('<img />');
         $(img).attr('src', map);
         $(img).attr('alt', $(element).text());
-        $(element).css('display', 'none');
-        var e = $('a', $(element).parent()).get(0);
-        $(e).html(img);
-        $(e).css('width', '100%');
-        $(e).css('max-width', '100%');
-        $(e).css('height', 'auto');
+        var a = $('<a />');
+        var url = $($('a', $(element).parent()).get(0)).attr('href');
+        $(a).attr('href', url);
+        $(a).html(img);
+        $(element).html(a);
+        $(element).css('width', '100%');
+        $(element).css('max-width', '100%');
+        $(element).css('height', 'auto');
     }
 }
 
