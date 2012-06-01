@@ -75,8 +75,7 @@ public function shortcode($p)
         return;
     }
     return sprintf(
-        '<div class="%s" data-lat="%s" data-lng="%s" data-zoom="%s"
-            style="width:%s;height:%s;">%s</div>',
+        '<div class="%s"><div data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div><div><a>大きな地図を見る。</a></div></div>',
         $this->class_name,
         $lat,
         $lng,
