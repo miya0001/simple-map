@@ -1,7 +1,7 @@
 (function($){
 
 function display(element, pos, zoom) {
-    if ($('html').width() >= 480) {
+    if ($('html').width() > 480) {
         var myOptions = {
             mapTypeControl: false,
             zoom: parseFloat(zoom),
@@ -18,6 +18,29 @@ function display(element, pos, zoom) {
             position: pos,
             map: map
         });
+    } else {
+        var map = 'http://maps.google.com/maps/api/staticmap?';
+        var args = {
+            center: pos.lat()+','+pos.lng(),
+            zoom: zoom,
+            size: 480+'x'+$(element).height(),
+            markers: 'color:red|label:A|'+pos.lat()+','+pos.lng(),
+            sensor: 'false'
+        };
+        var query = [];
+        for (var i in args) {
+            query[query.length] = i+'='+encodeURI(args[i]);
+        }
+        map = map + query.join('&');
+        var img = $('<img />');
+        $(img).attr('src', map);
+        $(img).attr('alt', $(element).text());
+        $(element).css('display', 'none');
+        var e = $('a', $(element).parent()).get(0);
+        $(e).html(img);
+        $(e).css('width', '100%');
+        $(e).css('max-width', '100%');
+        $(e).css('height', 'auto');
     }
 }
 
