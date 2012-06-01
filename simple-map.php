@@ -37,7 +37,10 @@ public function wp_enqueue_scripts()
     wp_enqueue_script('google-maps-api');
     wp_register_script(
         'simple-map',
-        plugins_url('js/simple-map.js' , __FILE__),
+        apply_filters(
+            "simple-map-script",
+            plugins_url('js/simple-map.js' , __FILE__)
+        ),
         array('jquery', 'google-maps-api'),
         filemtime(dirname(__FILE__).'/js/simple-map.js'),
         true
@@ -79,7 +82,7 @@ public function shortcode($p)
         $this->class_name,
         $lat,
         $lng,
-        $zoom, 
+        $zoom,
         $w,
         $h,
         $addr
