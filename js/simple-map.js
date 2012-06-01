@@ -1,23 +1,26 @@
+(function($){
+
 function display(element, pos, zoom) {
-    var myOptions = {
-        mapTypeControl: false,
-        zoom: parseFloat(zoom),
-        center: pos,
-        streetViewControl: false,
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(
-        element,
-        myOptions
-    );
-    var marker = new google.maps.Marker({
-        position: pos,
-        map: map
-    });
+    if ($('html').width() >= 480) {
+        var myOptions = {
+            mapTypeControl: false,
+            zoom: parseFloat(zoom),
+            center: pos,
+            streetViewControl: false,
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(
+            element,
+            myOptions
+        );
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map
+        });
+    }
 }
 
-(function($){
 $('.simple-map').each(function(){
     var element = $('div', this).get(0);
     var link = $('a', this).get(0);
@@ -55,5 +58,6 @@ $('.simple-map').each(function(){
         display(element, pos, zoom);
     }
 });
+
 })(jQuery);
 
