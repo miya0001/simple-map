@@ -33,14 +33,22 @@ public function wp_enqueue_scripts()
         null,
         true
     );
-    wp_enqueue_script('google-maps-api');
+
+    wp_register_script(
+        'gmaps.js',
+        plugins_url('js/gmaps.js' , __FILE__),
+        array('jquery', 'google-maps-api'),
+        '0.1.12.1',
+        true
+    );
+
     wp_register_script(
         'simple-map',
         apply_filters(
             "simple-map-script",
             plugins_url('js/simple-map.js' , __FILE__)
         ),
-        array('jquery', 'google-maps-api'),
+        array('gmaps.js'),
         filemtime(dirname(__FILE__).'/js/simple-map.js'),
         true
     );
@@ -79,7 +87,7 @@ public function shortcode($p)
         return;
     }
     return sprintf(
-        '<div class="%s"><div data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div><div><a>大きな地図を見る。</a></div></div>',
+        '<div class="%s"><div data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div></div>',
         $this->class_name,
         $lat,
         $lng,
