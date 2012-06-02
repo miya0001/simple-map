@@ -48,7 +48,7 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
     }
 }
 
-$('.simple-map').each(function(){
+$('.simplemap').each(function(){
     var element = $('div', this).get(0);
     var zoom = 16;
     if (parseFloat($(element).attr('data-zoom'))) {

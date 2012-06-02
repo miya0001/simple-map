@@ -7,21 +7,21 @@ Description: Insert google map convert from address.
 Version: 0.1.0
 Author URI: http://wpist.me/
 Domain Path: /languages
-Text Domain: simple-map
+Text Domain: simplemap
 */
 
 new SimpleMap();
 
 class SimpleMap{
 
-private $class_name = 'simple-map';
+private $class_name = 'simplemap';
 private $width      = '100%';
 private $height     = '200px';
 private $zoom       = 16;
 
 function __construct()
 {
-    add_shortcode('simple-map', array(&$this, 'shortcode'));
+    add_shortcode('map', array(&$this, 'shortcode'));
 }
 
 public function wp_enqueue_scripts()
@@ -43,16 +43,16 @@ public function wp_enqueue_scripts()
     );
 
     wp_register_script(
-        'simple-map',
+        'simplemap',
         apply_filters(
-            "simple-map-script",
-            plugins_url('js/simple-map.js' , __FILE__)
+            "simplemap_script",
+            plugins_url('js/simplemap.js' , __FILE__)
         ),
         array('gmaps.js'),
         filemtime(dirname(__FILE__).'/js/simple-map.js'),
         true
     );
-    wp_enqueue_script('simple-map');
+    wp_enqueue_script('simplemap');
 }
 
 public function shortcode($p)
@@ -62,17 +62,17 @@ public function shortcode($p)
     if (isset($p['width']) && preg_match("/^[0-9]+(%|px)$/", $p['width'])) {
         $w = $p['width'];
     } else {
-        $w = $this->width;
+        $w = apply_filters("simplemap_default_width", $this->width);
     }
     if (isset($p['height']) && preg_match("/^[0-9]+(%|px)$/", $p['height'])) {
         $h = $p['height'];
     } else {
-        $h = $this->height;
+        $h = apply_filters("simplemap_default_height", $this->height);
     }
     if (isset($p['zoom']) && $p['zoom']) {
         $zoom = $p['zoom'];
     } else {
-        $zoom = $this->zoom;
+        $zoom = apply_filters('simplemap_default_zoom', $this->zoom);
     }
     $addr = '';
     $lat = '';
@@ -88,7 +88,7 @@ public function shortcode($p)
     }
     return sprintf(
         '<div class="%s"><div data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div></div>',
-        $this->class_name,
+        apply_filters("simplemap_class_name", $this->class_name),
         $lat,
         $lng,
         $zoom,
