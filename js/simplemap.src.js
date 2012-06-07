@@ -1,13 +1,12 @@
 (function($){
 
 var SimpleMap = function(element, pos, zoom) {
-    this.base_width = 480;
     this.base_url = 'https://maps.google.com/maps?';
     this.display(element, pos, zoom);
 }
 
 SimpleMap.prototype.display = function(element, pos, zoom) {
-    if ($('html').width() > 480) {
+    if ($('html').width() > $(element).attr('data-breakpoint')) {
         var map = new GMaps({
             div: element,
             lat: pos.lat(),
@@ -26,7 +25,7 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         var url = GMaps.staticMapURL({
             center: pos.lat()+','+pos.lng(),
             zoom: zoom,
-            size: 480+'x'+$(element).height(),
+            size: $(element).attr('data-zoom')+'x'+$(element).height(),
             markers: [
                 {lat: pos.lat(), lng: pos.lng()}
             ],

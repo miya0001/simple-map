@@ -18,6 +18,7 @@ private $class_name = 'simplemap';
 private $width      = '100%';
 private $height     = '200px';
 private $zoom       = 16;
+private $breakpoint = 480;
 
 function __construct()
 {
@@ -49,7 +50,7 @@ public function wp_enqueue_scripts()
             plugins_url('js/simplemap.js' , __FILE__)
         ),
         array('gmaps.js'),
-        filemtime(dirname(__FILE__).'/js/simple-map.js'),
+        filemtime(dirname(__FILE__).'/js/simplemap.js'),
         true
     );
     wp_enqueue_script('simplemap');
@@ -74,6 +75,11 @@ public function shortcode($p)
     } else {
         $zoom = apply_filters('simplemap_default_zoom', $this->zoom);
     }
+    if (isset($p['breakpoint']) && intval($p['breakpoint'])) {
+        $breakpoint = intval($p['breakpoint']);
+    } else {
+        $breakpoint = apply_filters('simplemap_breakpoint', $this->breakpoint);
+    }
     $addr = '';
     $lat = '';
     $lng = '';
@@ -87,8 +93,9 @@ public function shortcode($p)
         return;
     }
     return sprintf(
-        '<div class="%s"><div data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div></div>',
+        '<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div></div>',
         apply_filters("simplemap_class_name", $this->class_name),
+        $breakpoint,
         $lat,
         $lng,
         $zoom,
