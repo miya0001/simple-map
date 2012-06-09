@@ -6,7 +6,11 @@ var SimpleMap = function(element, pos, zoom) {
 }
 
 SimpleMap.prototype.display = function(element, pos, zoom) {
-    if ($('html').width() > $(element).attr('data-breakpoint')) {
+    var breakpoint = $(element).attr('data-breakpoint');
+    if (breakpoint > 640) {
+        breakpoint = 640;
+    }
+    if ($('html').width() > breakpoint) {
         var map = new GMaps({
             div: element,
             lat: pos.lat(),
@@ -25,7 +29,7 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         var url = GMaps.staticMapURL({
             center: pos.lat()+','+pos.lng(),
             zoom: zoom,
-            size: $(element).attr('data-zoom')+'x'+$(element).height(),
+            size: breakpoint+'x'+$(element).height(),
             markers: [
                 {lat: pos.lat(), lng: pos.lng()}
             ],
@@ -41,7 +45,6 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         );
         $(a).html(img);
         $(element).html(a);
-        $(element).css('width', '100%');
         $(element).css('max-width', '100%');
         $(element).css('height', 'auto');
     }

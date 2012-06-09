@@ -19,6 +19,7 @@ private $width      = '100%';
 private $height     = '200px';
 private $zoom       = 16;
 private $breakpoint = 480;
+private $max_breakpoint = 640;
 
 function __construct()
 {
@@ -76,7 +77,11 @@ public function shortcode($p)
         $zoom = apply_filters('simplemap_default_zoom', $this->zoom);
     }
     if (isset($p['breakpoint']) && intval($p['breakpoint'])) {
-        $breakpoint = intval($p['breakpoint']);
+        if (intval($p['breakpoint'] > $max_breakpoint) {
+            $breakpoint = $max_breakpoint;
+        } else {
+            $breakpoint = intval($p['breakpoint']);
+        }
     } else {
         $breakpoint = apply_filters('simplemap_breakpoint', $this->breakpoint);
     }
