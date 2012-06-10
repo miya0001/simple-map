@@ -77,7 +77,7 @@ public function shortcode($p)
         $zoom = apply_filters('simplemap_default_zoom', $this->zoom);
     }
     if (isset($p['breakpoint']) && intval($p['breakpoint'])) {
-        if (intval($p['breakpoint'] > $max_breakpoint) {
+        if (intval($p['breakpoint']) > $max_breakpoint) {
             $breakpoint = $max_breakpoint;
         } else {
             $breakpoint = intval($p['breakpoint']);
