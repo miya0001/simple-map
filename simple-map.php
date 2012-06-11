@@ -90,8 +90,8 @@ public function shortcode($p)
     $lng = '';
     if (isset($p['addr']) && $p['addr']) {
         $addr = esc_html($p['addr']);
-    } elseif (isset($p['lat']) && preg_replace("/^[0-9\.]+$/", $p['lat'])
-                && isset($p['lng']) && preg_replace("/^[0-9\.]+$/", $p['lng'])){
+    } elseif (isset($p['lat']) && preg_match("/^[0-9\.]+$/", $p['lat'])
+                && isset($p['lng']) && preg_match("/^[0-9\.]+$/", $p['lng'])){
         $lat = $p['lat'];
         $lng = $p['lng'];
     } else {
