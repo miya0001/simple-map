@@ -20,7 +20,7 @@ This plugin allow you convert address to google maps like below.
 = Some features: =
 
 * Allow you to embed google map based on shortcode.
-* Points can be added using address or coordinate.
+* Points can be added using address or lat/ong.
 * Display static map for iPhone automatically.
 * [See more](http://wpist.me/wp/simple-map)
 

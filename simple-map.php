@@ -83,15 +83,18 @@ public function shortcode($p)
             $breakpoint = intval($p['breakpoint']);
         }
     } else {
-        $breakpoint = apply_filters('simplemap_default_breakpoint', $this->breakpoint);
+        $breakpoint = apply_filters(
+            'simplemap_default_breakpoint',
+            $this->breakpoint
+        );
     }
     $addr = '';
     $lat = '';
     $lng = '';
     if (isset($p['addr']) && $p['addr']) {
         $addr = esc_html($p['addr']);
-    } elseif (isset($p['lat']) && preg_match("/^[0-9\.]+$/", $p['lat'])
-                && isset($p['lng']) && preg_match("/^[0-9\.]+$/", $p['lng'])){
+    } elseif (isset($p['lat']) && preg_match("/^\-?[0-9\.]+$/", $p['lat'])
+                && isset($p['lng']) && preg_match("/^\-?[0-9\.]+$/", $p['lng'])){
         $lat = $p['lat'];
         $lng = $p['lng'];
     } else {
