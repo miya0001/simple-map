@@ -83,7 +83,7 @@ public function shortcode($p)
             $breakpoint = intval($p['breakpoint']);
         }
     } else {
-        $breakpoint = apply_filters('simplemap_breakpoint', $this->breakpoint);
+        $breakpoint = apply_filters('simplemap_default_breakpoint', $this->breakpoint);
     }
     $addr = '';
     $lat = '';
