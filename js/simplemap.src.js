@@ -38,8 +38,6 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         var img = $('<img />');
         $(img).attr('src', url);
         $(img).attr('alt', $(element).text());
-        $(img).css('max-width', '100%');
-        $(img).css('height', 'auto');
         var a = $('<a />');
         $(a).attr(
             'href',
@@ -47,8 +45,7 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         );
         $(a).html(img);
         $(element).html(a);
-        $(element).css('max-width', '100%');
-        $(element).css('height', 'auto');
+        $(element).addClass('staticmap');
     }
 }
 

@@ -3,8 +3,8 @@ Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
-Tested up to: 3.3.2
-Stable tag: 0.3.0
+Tested up to: 3.4
+Stable tag: 0.3.1
 
 Easy way to embed google map.
 

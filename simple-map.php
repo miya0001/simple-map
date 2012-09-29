@@ -4,7 +4,7 @@ Plugin Name: Simple Map
 Author: Takayuki Miyauchi
 Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.
-Version: 0.3.0
+Version: 0.3.1
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -29,7 +29,7 @@ function __construct()
 
 public function wp_head()
 {
-    echo "<style>.simplemap img{max-width:none;padding:0;margin:0;}.staticmap,.staticmap img{max-width:100%;height:auto;}</style>\n";
+    echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}</style>\n";
 }
 
 public function wp_enqueue_scripts()
