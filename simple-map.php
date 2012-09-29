@@ -2,9 +2,9 @@
 /*
 Plugin Name: Simple Map
 Author: Takayuki Miyauchi
-Plugin URI: http://wpist.me/wp/simple-map
+Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.
-Version: 0.2.0
+Version: 0.3.0
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -23,7 +23,13 @@ private $max_breakpoint = 640;
 
 function __construct()
 {
+    add_action('wp_head', array(&$this, 'wp_head'));
     add_shortcode('map', array(&$this, 'shortcode'));
+}
+
+public function wp_head()
+{
+    echo "<style>.simplemap img{max-width:none;padding:0;margin:0;}.staticmap,.staticmap img{max-width:100%;height:auto;}</style>\n";
 }
 
 public function wp_enqueue_scripts()

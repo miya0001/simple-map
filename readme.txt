@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.3.2
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 
 Easy way to embed google map.
 
@@ -22,7 +22,6 @@ This plugin allow you convert address to google maps like below.
 * Allow you to embed google map based on shortcode.
 * Points can be added using address or lat/ong.
 * Display static map for iPhone automatically.
-* [See more](http://wpist.me/wp/simple-map)
 
 = Translators =
 
