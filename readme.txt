@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 0.5.0
+Stable tag: 0.6.0
 
 Easy way to embed google map.
 
@@ -15,6 +15,8 @@ This plugin allow you convert address to google maps like below.
 
 [map addr="San Francisco, California"]
 
+Another way, you can embed Google Map with url only like oEmbed.
+
 [This plugin maintained on GitHub.](https://github.com/miya0001/simple-map)
 
 = Some features: =
@@ -22,6 +24,7 @@ This plugin allow you convert address to google maps like below.
 * Allow you to embed google map based on shortcode.
 * Points can be added using address or lat/ong.
 * Display static map for iPhone automatically.
+* oEmbed Support.
 
 = Translators =
 
@@ -45,6 +48,9 @@ Please contact to me.
 * The plug-in is made effective.
 
 == Changelog ==
+
+= 0.6.0 =
+* oEmbed Support
 
 = 0.1.0 =
 * The first release.

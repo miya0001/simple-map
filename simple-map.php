@@ -4,7 +4,7 @@ Plugin Name: Simple Map
 Author: Takayuki Miyauchi
 Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.
-Version: 0.5.0
+Version: 0.6.0
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -23,8 +23,37 @@ private $max_breakpoint = 640;
 
 function __construct()
 {
-    add_action('wp_head', array(&$this, 'wp_head'));
-    add_shortcode('map', array(&$this, 'shortcode'));
+    add_action('plugins_loaded', array($this, 'plugins_loaded'));
+}
+
+public function plugins_loaded()
+{
+    add_action('wp_head', array($this, 'wp_head'));
+    add_shortcode('map', array($this, 'shortcode'));
+    add_shortcode('oembed_map', array($this, 'oembed_map'));
+
+    wp_embed_register_handler(
+        'google-map',
+        '#(https://maps.google.co.jp/maps(/ms)?\?.+)#i',
+        array(&$this, 'oembed_handler')
+    );
+}
+
+public function oembed_handler($match)
+{
+    return '[oembed_map]'.esc_url($match[0]).'[/oembed_map]';
+}
+
+public function oembed_map($p, $content)
+{
+    $iframe = '<iframe width="%s" height="%s" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="%s"></iframe>';
+
+    return sprintf(
+        $iframe,
+        apply_filters("simplemap_default_width", $this->width),
+        apply_filters("simplemap_default_height", $this->height),
+        $content.'&amp;output=embed'
+    );
 }
 
 public function wp_head()

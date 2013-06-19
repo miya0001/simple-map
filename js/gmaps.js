@@ -1,4 +1,4 @@
-/*
+/*!
  * GMaps.js v0.3.3
  * http://hpneo.github.com/gmaps/
  *
