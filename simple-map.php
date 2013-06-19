@@ -4,7 +4,7 @@ Plugin Name: Simple Map
 Author: Takayuki Miyauchi
 Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.
-Version: 0.6.0
+Version: 0.6.1
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -30,7 +30,6 @@ public function plugins_loaded()
 {
     add_action('wp_head', array($this, 'wp_head'));
     add_shortcode('map', array($this, 'shortcode'));
-    add_shortcode('oembed_map', array($this, 'oembed_map'));
 
     wp_embed_register_handler(
         'google-map',
@@ -41,19 +40,7 @@ public function plugins_loaded()
 
 public function oembed_handler($match)
 {
-    return '[oembed_map]'.esc_url($match[0]).'[/oembed_map]';
-}
-
-public function oembed_map($p, $content)
-{
-    $iframe = '<iframe width="%s" height="%s" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="%s"></iframe>';
-
-    return sprintf(
-        $iframe,
-        apply_filters("simplemap_default_width", $this->width),
-        apply_filters("simplemap_default_height", $this->height),
-        $content.'&amp;output=embed'
-    );
+    return sprintf('[map url="%s"]', esc_url($match[0]));
 }
 
 public function wp_head()
@@ -126,7 +113,17 @@ public function shortcode($p, $content = null)
     $addr = '';
     $lat = '';
     $lng = '';
-    if (isset($p['addr']) && $p['addr']) {
+
+    if (isset($p['url']) && $p['url']) {
+        $iframe = '<iframe width="%s" height="%s" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="%s"></iframe>';
+
+        return sprintf(
+            $iframe,
+            $w,
+            $h,
+            esc_url($p['url'].'&output=embed')
+        );
+    } elseif (isset($p['addr']) && $p['addr']) {
         $addr = esc_html($p['addr']);
     } elseif ($content) {
         $addr =  do_shortcode($content);
