@@ -3,8 +3,8 @@ Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
-Tested up to: 3.5
-Stable tag: 0.6.2
+Tested up to: 3.6
+Stable tag: 0.7.0
 
 Easy way to embed google map.
 
@@ -48,6 +48,9 @@ Please contact to me.
 * The plug-in is made effective.
 
 == Changelog ==
+
+= 0.7.0 =
+* gmaps.js updated 0.4.4 to 0.4.5
 
 = 0.6.0 =
 * oEmbed Support
