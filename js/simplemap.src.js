@@ -55,7 +55,15 @@ $('.simplemap').each(function(){
     if (parseFloat($(element).attr('data-zoom'))) {
         zoom = $(element).attr('data-zoom');
     }
-    if ($(element).text().length) {
+    if ($(element).attr('data-lat') && $(element).attr('data-lng')) {
+        var lat = $(element).attr('data-lat');
+        var lng = $(element).attr('data-lng');
+        var pos = new google.maps.LatLng(
+            lat,
+            lng
+        );
+        new SimpleMap(element, pos, zoom);
+    } else if ($(element).text().length) {
         GMaps.geocode({
             address: $(element).text(),
             callback: function(results, status) {
@@ -65,14 +73,6 @@ $('.simplemap').each(function(){
                 }
             }
         });
-    } else if ($(element).attr('data-lat') && $(element).attr('data-lng')) {
-        var lat = $(element).attr('data-lat');
-        var lng = $(element).attr('data-lng');
-        var pos = new google.maps.LatLng(
-            lat,
-            lng
-        );
-        new SimpleMap(element, pos, zoom);
     }
 });
 
