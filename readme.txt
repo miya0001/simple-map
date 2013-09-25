@@ -13,7 +13,7 @@ Easy way to embed google map.
 Easy way to embed google map.
 This plugin allow you convert address to google maps like below.
 
-[map addr="San Francisco, California"]
+[map]San Francisco, California[/map]
 
 Another way, you can embed Google Map with url only like oEmbed.
 
