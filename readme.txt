@@ -3,8 +3,8 @@ Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
-Tested up to: 3.6
-Stable tag: 0.8.0
+Tested up to: 3.7
+Stable tag: 0.9.0
 
 Easy way to embed google map.
 
@@ -48,6 +48,9 @@ Please contact to me.
 * The plug-in is made effective.
 
 == Changelog ==
+
+= 0.9.0 =
+* hook changed to the init.
 
 = 0.8.0 =
 * shortcode atts and address priority changed.
