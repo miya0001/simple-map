@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.7
-Stable tag: 0.9.0
+Stable tag: 1.0.0
 
 Easy way to embed google map.
 
@@ -48,6 +48,9 @@ Please contact to me.
 * The plug-in is made effective.
 
 == Changelog ==
+
+= 1.0.0 =
+* Delete hl=ja param from static map link uri.
 
 = 0.9.0 =
 * hook changed to the init.

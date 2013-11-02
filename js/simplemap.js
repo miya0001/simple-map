@@ -41,7 +41,7 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         var a = $('<a />');
         $(a).attr(
             'href',
-            this.base_url+'q='+pos.lat()+','+pos.lng()+'&z='+zoom+'&hl=ja'
+            this.base_url+'q='+pos.lat()+','+pos.lng()+'&z='+zoom
         );
         $(a).html(img);
         $(element).html(a);
