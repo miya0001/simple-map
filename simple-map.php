@@ -64,21 +64,13 @@ public function wp_enqueue_scripts()
     );
 
     wp_register_script(
-        'gmaps.js',
-        plugins_url('js/gmaps.min.js' , __FILE__),
-        array('jquery', 'google-maps-api'),
-        '0.4.8',
-        true
-    );
-
-    wp_register_script(
         'simplemap',
         apply_filters(
             "simplemap_script",
-            plugins_url('js/simplemap.min.js' , __FILE__)
+            plugins_url('js/simple-map.min.js' , __FILE__)
         ),
-        array('gmaps.js'),
-        filemtime(dirname(__FILE__).'/js/simplemap.min.js'),
+        array('jquery', 'google-maps-api'),
+        filemtime(dirname(__FILE__).'/js/simple-map.min.js'),
         true
     );
     wp_enqueue_script('simplemap');

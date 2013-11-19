@@ -1,0 +1,16 @@
+{
+  "name": "simple-map",
+  "title": "Simple Map",
+  "description": "Easy way to embed google map(s) using gmaps.js.",
+  "version": "1.1.0",
+  "homepage": "http://wordpress.org/plugins",
+  "author": {
+    "name": "miya",
+    "email": "miya@wpist.me"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.1.1"
+  },
+  "keywords": []
+}
