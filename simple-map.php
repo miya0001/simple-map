@@ -67,7 +67,7 @@ public function wp_enqueue_scripts()
         'gmaps.js',
         plugins_url('js/gmaps.min.js' , __FILE__),
         array('jquery', 'google-maps-api'),
-        '0.4.5',
+        '0.4.8',
         true
     );
 
