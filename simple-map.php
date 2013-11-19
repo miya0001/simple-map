@@ -132,6 +132,7 @@ public function shortcode($p, $content = null)
                 && isset($p['lng']) && preg_match("/^\-?[0-9\.]+$/", $p['lng'])){
         $lat = $p['lat'];
         $lng = $p['lng'];
+		$cnt = do_shortcode($content);
     } elseif (isset($p['addr']) && $p['addr']) {
         $addr = esc_html($p['addr']);
     } elseif ($content) {
@@ -140,7 +141,7 @@ public function shortcode($p, $content = null)
         return;
     }
     return sprintf(
-        '<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;">%s</div></div>',
+        '<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;" data-cont="%s">%s</div></div>',
         apply_filters("simplemap_class_name", $this->class_name),
         $breakpoint,
         $lat,
@@ -148,6 +149,7 @@ public function shortcode($p, $content = null)
         $zoom,
         $w,
         $h,
+		$cnt,
         $addr
     );
 }
