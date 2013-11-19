@@ -1,28 +1,43 @@
 === Simple Map ===
-Contributors: miyauchi
+Contributors: miyauchi, reddo
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.7
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
-Easy way to embed google map.
+Easy way to embed google map(s) using [gmaps.js](http://hpneo.github.com/gmaps/).
 
 == Description ==
 
-Easy way to embed google map.
-This plugin allow you convert address to google maps like below.
+Easy way to embed google map(s) using [gmaps.js](http://hpneo.github.com/gmaps/).
+
+This plugin allows you to convert address into google maps like below:
 
 [map]San Francisco, California[/map]
 
 Another way, you can embed Google Map with url only like oEmbed.
+
+
+You can also use coordinates, set width, height and zoom:
+
+[map lat="37.77493" lng="-122.41942" width="100%" height="400px" zoom="15"]
+Text you would
+like to appear 
+as a tooltip 
+goes here
+[/map]
+
+In this case there will be a marker on the map with a tooltip appearing on click on said marker. 
+You can use simple html as the tooltip content.
+
 
 [This plugin maintained on GitHub.](https://github.com/miya0001/simple-map)
 
 = Some features: =
 
 * Allow you to embed google map based on shortcode.
-* Points can be added using address or lat/ong.
+* Markers can be added using address or lat/ong.
 * Display static map for iPhone automatically.
 * oEmbed Support.
 
@@ -40,14 +55,45 @@ Please contact to me.
 = Contributors =
 
 * [Takayuki Miyauchi](http://firegoby.jp/)
+* [Zoltán Balogh](http://birdcreation.com/)
 
 == Installation ==
 
-* A plug-in installation screen is displayed on the WordPress admin panel.
-* It installs it in `wp-content/plugins`.
-* The plug-in is made effective.
+* Download the zip, extract it and upload the extracted folder to your-wp-directory/wp-content/plugins/
+* Go to the plugins administration screen in your WordPress admin and activate the plugin.
+
+OR
+
+* Download the zip, go to the plugins administration screen in your WordPress admin, click on Add New then on upload, browse to the downloaded zip, upload the plugin and activate it.
+
+OR
+
+* Go to the plugins administration screen in your WordPress admin, click on Add New, search for Simple Map and click on Install Now.
+
+*Usage*
+
+This plugin allows you to convert address into google maps like below:
+
+[map]San Francisco, California[/map]
+
+Another way, you can embed Google Map with url only like oEmbed.
+
+You can also use coordinates, set width, height and zoom:
+
+[map lat="37.77493" lng="-122.41942" width="100%" height="400px" zoom="15"]
+Text you would
+like to appear 
+as a tooltip 
+goes here
+[/map]
+
+In this case there will be a marker on the map with a tooltip appearing on click on said marker. 
+You can use simple html as the tooltip content.
 
 == Changelog ==
+
+= 1.0.1 =
+*Added support for gmaps.js tooltip on markers
 
 = 1.0.0 =
 * Delete hl=ja param from static map link uri.
