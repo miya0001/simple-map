@@ -1,6 +1,7 @@
 {
   "name": "simple-map",
   "title": "Simple Map",
+  "license" : "GPLv2",
   "description": "Easy way to embed google map(s) using gmaps.js.",
   "version": "1.1.0",
   "homepage": "http://wordpress.org/plugins/simple-map/",
@@ -9,7 +10,7 @@
     "url" : "https://github.com/miya0001/simple-map"
   },
   "author": {
-    "name": "miya",
+    "name": "Takayuki Miyauchi",
     "url": "http://wpist.me/"
   },
   "devDependencies": {

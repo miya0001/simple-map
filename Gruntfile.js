@@ -1,3 +1,5 @@
+/* vim: set ft=javascript expandtab shiftwidth=2 tabstop=2: */
+
 module.exports = function( grunt ) {
 
   // Project configuration
@@ -12,10 +14,14 @@ module.exports = function( grunt ) {
           ]
         },
         options: {
-          banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
+          banner: '/**\n' +
+            ' * <%= pkg.title %> - v<%= pkg.version %>\n' +
+            ' *\n' +
             ' * <%= pkg.homepage %>\n' +
-            ' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-            ' * Licensed GPLv2+' +
+            ' * <%= pkg.repository.url %>\n' +
+            ' *\n' +
+            ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
+            ' * Released under the <%= pkg.license %>\n' +
             ' */\n',
           mangle: {
             except: ['jQuery']
