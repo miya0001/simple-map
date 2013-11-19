@@ -4,7 +4,7 @@ Plugin Name: Simple Map
 Author: Takayuki Miyauchi
 Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.
-Version: 1.0.0
+Version: 1.1.0
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -115,6 +115,10 @@ public function shortcode($p, $content = null)
             $this->breakpoint
         );
     }
+    if ($content) {
+        $content = do_shortcode($content);
+    }
+
     $addr = '';
     $lat = '';
     $lng = '';
@@ -132,25 +136,26 @@ public function shortcode($p, $content = null)
                 && isset($p['lng']) && preg_match("/^\-?[0-9\.]+$/", $p['lng'])){
         $lat = $p['lat'];
         $lng = $p['lng'];
-		$cnt = do_shortcode($content);
     } elseif (isset($p['addr']) && $p['addr']) {
-        $addr = esc_html($p['addr']);
-    } elseif ($content) {
-        $addr =  do_shortcode($content);
-    } else {
+        if ($content) {
+            $addr = esc_html($p['addr']);
+        } else {
+            $content = esc_html($p['addr']);
+        }
+    } elseif (!$content) {
         return;
     }
     return sprintf(
-        '<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" style="width:%s;height:%s;" data-cont="%s">%s</div></div>',
+        '<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" data-addr="%s" style="width:%s;height:%s;">%s</div></div>',
         apply_filters("simplemap_class_name", $this->class_name),
         $breakpoint,
         $lat,
         $lng,
         $zoom,
+        $addr,
         $w,
         $h,
-		$cnt,
-        $addr
+        trim($content)
     );
 }
 

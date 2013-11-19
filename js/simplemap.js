@@ -21,13 +21,20 @@ SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-        map.addMarker({
-            lat: pos.lat(),
-            lng: pos.lng(),
-			infoWindow: {
-			  content: infoCont
-			}
-        });
+        if (infoCont.length) {
+            map.addMarker({
+                lat: pos.lat(),
+                lng: pos.lng(),
+                infoWindow: {
+                    content: infoCont
+                }
+            });
+        } else {
+            map.addMarker({
+                lat: pos.lat(),
+                lng: pos.lng()
+            });
+        }
     } else {
         var url = GMaps.staticMapURL({
             center: pos.lat()+','+pos.lng(),
@@ -61,19 +68,29 @@ $('.simplemap').each(function(){
     if ($(element).data('lat') && $(element).data('lng')) {
         var lat = $(element).data('lat');
         var lng = $(element).data('lng');
-        var infoCont = $(element).data('cont');
+        var infoCont = $(element).html();
         var pos = new google.maps.LatLng(
             lat,
             lng
         );
         new SimpleMap(element, pos, zoom, infoCont);
+    } else if ($(element).data('addr')) {
+        GMaps.geocode({
+            address: $(element).data('addr'),
+            callback: function(results, status) {
+                if (status == 'OK') {
+                    var pos = results[0].geometry.location;
+                    new SimpleMap(element, pos, zoom, $(element).html());
+                }
+            }
+        });
     } else if ($(element).text().length) {
         GMaps.geocode({
             address: $(element).text(),
             callback: function(results, status) {
                 if (status == 'OK') {
                     var pos = results[0].geometry.location;
-                    new SimpleMap(element, pos, zoom);
+                    new SimpleMap(element, pos, zoom, $(element).text());
                 }
             }
         });

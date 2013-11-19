@@ -1,10 +1,10 @@
 === Simple Map ===
-Contributors: miyauchi, reddo
+Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.7
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 
 Easy way to embed google map(s) using [gmaps.js](http://hpneo.github.com/gmaps/).
 
@@ -23,12 +23,12 @@ You can also use coordinates, set width, height and zoom:
 
 [map lat="37.77493" lng="-122.41942" width="100%" height="400px" zoom="15"]
 Text you would
-like to appear 
-as a tooltip 
+like to appear
+as a tooltip
 goes here
 [/map]
 
-In this case there will be a marker on the map with a tooltip appearing on click on said marker. 
+In this case there will be a marker on the map with a tooltip appearing on click on said marker.
 You can use simple html as the tooltip content.
 
 
@@ -47,10 +47,7 @@ You can use simple html as the tooltip content.
 
 Please contact to me.
 
-* http://wpist.me/ (en)
-* http://firegoby.jp/ (ja)
-* @miya0001 on twitter.
-* https://github.com/miya0001/simple-map
+* https://github.com/miya0001/simple-map/issues
 
 = Contributors =
 
@@ -92,7 +89,7 @@ You can use simple html as the tooltip content.
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.1.0 =
 *Added support for gmaps.js tooltip on markers
 
 = 1.0.0 =
