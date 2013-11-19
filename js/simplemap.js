@@ -1,12 +1,12 @@
 (function($){
 
-var SimpleMap = function(element, pos, zoom) {
+var SimpleMap = function(element, pos, zoom, infoCont) {
     this.base_url = 'https://maps.google.com/maps?';
-    this.display(element, pos, zoom);
+    this.display(element, pos, zoom, infoCont);
 }
 
-SimpleMap.prototype.display = function(element, pos, zoom) {
-    var breakpoint = $(element).attr('data-breakpoint');
+SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
+    var breakpoint = $(element).data('breakpoint');
     if (breakpoint > 640) {
         breakpoint = 640;
     }
@@ -23,7 +23,10 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
         });
         map.addMarker({
             lat: pos.lat(),
-            lng: pos.lng()
+            lng: pos.lng(),
+			infoWindow: {
+			  content: infoCont
+			}
         });
     } else {
         var url = GMaps.staticMapURL({
@@ -52,17 +55,18 @@ SimpleMap.prototype.display = function(element, pos, zoom) {
 $('.simplemap').each(function(){
     var element = $('div', this).get(0);
     var zoom = 16;
-    if (parseFloat($(element).attr('data-zoom'))) {
-        zoom = $(element).attr('data-zoom');
+    if (parseFloat($(element).data('zoom'))) {
+        zoom = $(element).data('zoom');
     }
-    if ($(element).attr('data-lat') && $(element).attr('data-lng')) {
-        var lat = $(element).attr('data-lat');
-        var lng = $(element).attr('data-lng');
+    if ($(element).data('lat') && $(element).data('lng')) {
+        var lat = $(element).data('lat');
+        var lng = $(element).data('lng');
+        var infoCont = $(element).data('cont');
         var pos = new google.maps.LatLng(
             lat,
             lng
         );
-        new SimpleMap(element, pos, zoom);
+        new SimpleMap(element, pos, zoom, infoCont);
     } else if ($(element).text().length) {
         GMaps.geocode({
             address: $(element).text(),
@@ -77,4 +81,3 @@ $('.simplemap').each(function(){
 });
 
 })(jQuery);
-
