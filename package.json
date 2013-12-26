@@ -13,6 +13,9 @@
     "name": "Takayuki Miyauchi",
     "url": "http://wpist.me/"
   },
+  "dependencies": {
+    "gmaps": "git+ssh://git@github.com:HPNeo/gmaps.git#0.4.9"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.1.1"

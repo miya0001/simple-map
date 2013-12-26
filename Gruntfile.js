@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
       all: {
         files: {
           'js/simple-map.min.js': [
-            'js/gmaps.js',
+            'node_modules/gmaps/gmaps.js',
             'js/simple-map.js'
           ]
         },
