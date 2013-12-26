@@ -3,8 +3,8 @@ Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
-Tested up to: 3.7
-Stable tag: 1.1.0
+Tested up to: 3.8
+Stable tag: 1.2.0
 
 Easy way to embed google map(s) using [gmaps.js](http://hpneo.github.com/gmaps/).
 
