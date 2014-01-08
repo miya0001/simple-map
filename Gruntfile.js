@@ -20,6 +20,9 @@ module.exports = function( grunt ) {
             ' * <%= pkg.homepage %>\n' +
             ' * <%= pkg.repository.url %>\n' +
             ' *\n' +
+            ' * Special thanks!\n' +
+            ' * http://hpneo.github.io/gmaps/\n' +
+            ' *\n' +
             ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
             ' * Released under the <%= pkg.license %>\n' +
             ' */\n',
