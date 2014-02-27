@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 
 Easy way to embed google map(s).
 
@@ -94,6 +94,9 @@ You can use simple html as the tooltip content.
 3. Mobile Support. (Google static map)
 
 == Changelog ==
+
+= 1.4.0 =
+* change URL match pattern.
 
 = 1.3.0 =
 * Update gmaps.js to 0.4.9.
