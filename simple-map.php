@@ -34,7 +34,7 @@ public function init()
 
     wp_embed_register_handler(
         'google-map',
-        '#(https://maps.google.co.jp/maps(/ms)?\?.+)#i',
+        '#(https://(www|maps).google.[a-z]{2,3}\.?[a-z]{0,3}/maps(/ms)?\?.+)#i',
         array(&$this, 'oembed_handler')
     );
 }
