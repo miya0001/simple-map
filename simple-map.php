@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Simple Map
+Plugin Name: Simple Google Map
 Author: Takayuki Miyauchi
 Plugin URI: http://wpist.me/
 Description: Insert google map convert from address.

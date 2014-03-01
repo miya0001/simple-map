@@ -1,4 +1,4 @@
-=== Simple Map ===
+=== Simple Google Map ===
 Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: widget
