@@ -53,6 +53,7 @@ Please contact to me.
 
 * [Takayuki Miyauchi](http://firegoby.jp/)
 * [Zoltán Balogh](http://birdcreation.com/)
+* [Takanobu Watanabe](https://github.com/tknv)
 
 == Installation ==
 
