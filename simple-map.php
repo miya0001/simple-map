@@ -57,7 +57,7 @@ public function wp_enqueue_scripts()
 {
     wp_register_script(
         'google-maps-api',
-        'http://maps.google.com/maps/api/js?sensor=false',
+        '//maps.google.com/maps/api/js?sensor=false',
         false,
         null,
         true
