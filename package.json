@@ -14,7 +14,7 @@
     "url": "http://wpist.me/"
   },
   "dependencies": {
-    "gmaps": "git+ssh://git@github.com:HPNeo/gmaps.git#0.4.9"
+    "gmaps": "git+ssh://git@github.com:HPNeo/gmaps.git#0.4.11"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
