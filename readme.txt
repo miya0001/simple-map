@@ -37,7 +37,7 @@ You can use simple html as the tooltip content.
 = Some features: =
 
 * Allow you to embed google map based on shortcode.
-* Markers can be added using address or lat/ong.
+* Markers can be added using address or lat/long.
 * Display static map for iPhone automatically.
 * oEmbed Support.
 
