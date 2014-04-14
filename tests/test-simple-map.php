@@ -1,6 +1,6 @@
 <?php
 
-class SampleTest extends WP_UnitTestCase
+class SimpleMapTest extends WP_UnitTestCase
 {
     /*
      * @since 1.6.0
