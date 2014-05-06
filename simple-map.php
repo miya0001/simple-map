@@ -14,13 +14,13 @@ $simplemap = new Simple_Map();
 
 class Simple_Map {
 
-	private $shortcode_tag	= 'map';
-	private $class_name		= 'simplemap';
-	private $width			= '100%';
-	private $height			= '200px';
-	private $zoom			= 16;
-	private $breakpoint		= 480;
-	private $max_breakpoint	= 640;
+	private $shortcode_tag  = 'map';
+	private $class_name     = 'simplemap';
+	private $width          = '100%';
+	private $height         = '200px';
+	private $zoom           = 16;
+	private $breakpoint     = 480;
+	private $max_breakpoint = 640;
 
 	function __construct()
 	{
