@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: widget
 Requires at least: 3.3
 Tested up to: 3.9
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 
 Easy way to embed google map(s).
 
