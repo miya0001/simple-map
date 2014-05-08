@@ -80,12 +80,12 @@ class Simple_Map {
 	{
 		add_action( 'wp_footer', array( &$this, 'wp_enqueue_scripts' ) );
 
-		if ( isset( $p['width'] ) && preg_match( '/^[0-9]+( %|px )$/', $p['width'] ) ) {
+		if ( isset( $p['width'] ) && preg_match( '/^[0-9]+(%|px)$/', $p['width'] ) ) {
 			$w = $p['width'];
 		} else {
 			$w = apply_filters( 'simplemap_default_width', $this->width );
 		}
-		if ( isset( $p['height'] ) && preg_match( '/^[0-9]+( %|px )$/', $p['height'] ) ) {
+		if ( isset( $p['height'] ) && preg_match( '/^[0-9]+(%|px)$/', $p['height'] ) ) {
 			$h = $p['height'];
 		} else {
 			$h = apply_filters( 'simplemap_default_height', $this->height );
