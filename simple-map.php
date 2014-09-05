@@ -4,7 +4,7 @@ Plugin Name: Simple Map
 Author: Takayuki Miyauchi
 Plugin URI: https://github.com/miya0001/simple-map
 Description: Insert google map convert from address.
-Version: 1.9.0
+Version: 2.0.0
 Author URI: http://wpist.me/
 Domain Path: /languages
 Text Domain: simplemap
@@ -50,7 +50,7 @@ class Simple_Map {
 
 	public function wp_head()
 	{
-		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}</style>\n";
+		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
 	}
 
 	public function wp_enqueue_scripts()
@@ -90,7 +90,7 @@ class Simple_Map {
 		} else {
 			$h = apply_filters( 'simplemap_default_height', $this->height );
 		}
-		if ( isset( $p['zoom'] ) && $p['zoom'] ) {
+		if ( isset( $p['zoom'] ) && intval( $p['zoom'] ) ) {
 			$zoom = $p['zoom'];
 		} else {
 			$zoom = apply_filters( 'simplemap_default_zoom', $this->zoom );
@@ -109,6 +109,11 @@ class Simple_Map {
 		}
 		if ( $content ) {
 			$content = do_shortcode( $content );
+		}
+		if ( isset( $p['infowindow'] ) && $p['infowindow'] ) {
+			$infowindow = $p['infowindow'];
+		} else {
+			$infowindow = apply_filters( 'simplemap_default_infowindow', 'close' );
 		}
 
 		$addr = '';
@@ -138,13 +143,14 @@ class Simple_Map {
 			return;
 		}
 		return sprintf(
-			'<div class="%s"><div data-breakpoint="%s" data-lat="%s" data-lng="%s" data-zoom="%s" data-addr="%s" style="width:%s;height:%s;">%s</div></div>',
+			'<div class="%1$s"><div class="%1$s-content" data-breakpoint="%2$s" data-lat="%3$s" data-lng="%4$s" data-zoom="%5$s" data-addr="%6$s" data-infowindow="%7$s" style="width:%8$s;height:%9$s;">%10$s</div></div>',
 			apply_filters( 'simplemap_class_name', $this->class_name ),
 			$breakpoint,
 			$lat,
 			$lng,
 			$zoom,
 			$addr,
+			$infowindow,
 			$w,
 			$h,
 			trim( $content )

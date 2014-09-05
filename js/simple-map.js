@@ -6,6 +6,7 @@ var SimpleMap = function(element, pos, zoom, infoCont) {
 }
 
 SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
+    $(element).show();
     var breakpoint = $(element).data('breakpoint');
     if (breakpoint > 640) {
         breakpoint = 640;
@@ -22,13 +23,16 @@ SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         if (infoCont.length) {
-            map.addMarker({
+            var marker = map.addMarker({
                 lat: pos.lat(),
                 lng: pos.lng(),
                 infoWindow: {
                     content: infoCont
                 }
             });
+            if ($(element).data('infowindow') == 'open') {
+                marker.infoWindow.open(map, marker);
+            }
         } else {
             map.addMarker({
                 lat: pos.lat(),
