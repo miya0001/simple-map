@@ -31,7 +31,7 @@ SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
                 }
             });
             if ($(element).data('infowindow') == 'open') {
-                marker.infoWindow.open(map, marker);
+                marker.infoWindow.open(marker.map, marker);
             }
         } else {
             map.addMarker({
