@@ -1,10 +1,10 @@
 === Simple Map ===
 Contributors: miyauchi
 Donate link: http://wpist.me/
-Tags: widget
+Tags: google maps, map, shortcode, address
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 
 Easy way to embed google map(s).
 
@@ -123,6 +123,9 @@ You can use simple html as the tooltip content.
 3. Mobile Support. (Google static map)
 
 == Changelog ==
+
+= 2.2.0 =
+* update gmaps.js 0.4.15 to 0.4.16
 
 = 2.1.0 =
 * update gmaps.js 0.4.14 to 0.4.15
