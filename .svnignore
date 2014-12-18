@@ -1,0 +1,8 @@
+.git
+.gitignore
+.travis.yml
+Gruntfile.js
+bin
+package.json
+phpunit.xml
+tests

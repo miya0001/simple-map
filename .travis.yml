@@ -1,8 +1,10 @@
 language: php
 
 php:
+    - 5.2
     - 5.3
     - 5.4
+    - 5.5
 
 env:
     - WP_VERSION=4.1-RC3 WP_MULTISITE=0
