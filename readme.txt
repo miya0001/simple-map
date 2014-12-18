@@ -124,6 +124,10 @@ You can use simple html as the tooltip content.
 
 == Changelog ==
 
+= 2.3.0 =
+* Tested on the WordPress 4.1.
+* Uo to minimum required to WordPress 3.6.
+
 = 2.2.0 =
 * update gmaps.js 0.4.15 to 0.4.16
 
