@@ -28,17 +28,17 @@ as a tooltip
 goes here
 [/map]`
 
-In this case there will be a marker on the map with a tooltip appearing on click on said marker.
+In this case there will be a marker on the map with a tooltip appearing on click on the said marker.
 You can use simple html as the tooltip content.
 
 
-[This plugin maintained on GitHub.](https://github.com/miya0001/simple-map)
+[This plugin is maintained on GitHub.](https://github.com/miya0001/simple-map)
 
 = Some features: =
 
-* Allow you to embed google map based on shortcode.
+* Allows you to embed google map based on shortcode.
 * Markers can be added using address or lat/long.
-* Display static map for iPhone automatically.
+* Displays static map for iPhone automatically.
 * oEmbed Support.
 
 = Arguments =
@@ -52,7 +52,7 @@ You can use simple html as the tooltip content.
 * lng: Lng of the map you want to place.
 * infowindow: If you want to open infoWindow by Default, please set "open".
 
-If you will set lat/lng and address, this plugin give  priority to lat/lng.
+If you will set lat/lng and address, this plugin gives priority to lat/lng.
 
 = Filter Hooks =
 
@@ -72,7 +72,7 @@ This plugin has some filter hooks for customize default.
 
 * Japanese(ja) - [Takayuki Miyauchi](http://firegoby.jp/)
 
-Please contact to me.
+Please contact me.
 
 * https://github.com/miya0001/simple-map/issues
 
@@ -113,7 +113,7 @@ as a tooltip
 goes here
 [/map]`
 
-In this case there will be a marker on the map with a tooltip appearing on click on said marker.
+In this case there will be a marker on the map with a tooltip appearing on click on the said marker.
 You can use simple html as the tooltip content.
 
 == Screenshots ==
@@ -189,8 +189,8 @@ You can use simple html as the tooltip content.
 
 == Credits ==
 
-This plug-in is not guaranteed though the user of WordPress can freely use this plug-in free of charge regardless of the purpose.
-The author must acknowledge the thing that the operation guarantee and the support in this plug-in use are not done at all beforehand.
+This plugin is not guaranteed though the user of WordPress can freely use this plugin free of charge regardless of the purpose.
+The author must acknowledge the thing that the operation guarantee and the support in this plugin use are not done at all beforehand.
 
 == Contact ==
 
