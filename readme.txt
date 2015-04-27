@@ -3,8 +3,8 @@ Contributors: miyauchi
 Donate link: http://wpist.me/
 Tags: google maps, map, shortcode, address
 Requires at least: 3.6
-Tested up to: 4.1
-Stable tag: 2.4.0
+Tested up to: 4.2
+Stable tag: 2.4.1
 
 Easy way to embed google map(s).
 
