@@ -124,6 +124,13 @@ You can use simple html as the tooltip content.
 
 == Changelog ==
 
+= 2.6.0 =
+
+* Update gmaps.js from 0.4.18 to 0.4.19
+* Add front end test
+
+https://github.com/miya0001/simple-map/compare/2.5.0...2.6.0
+
 = 2.5.0 =
 * Update gmaps.js 0.4.17 to 0.4.18
 * Tested on WordPress 4.3

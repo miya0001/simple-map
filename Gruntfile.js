@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
             ' * Released under the <%= pkg.license %>\n' +
             ' */\n',
           mangle: {
-            except: ['jQuery', 'subarray']
+            except: ['jQuery']
           }
         }
       }
