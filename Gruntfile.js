@@ -27,10 +27,13 @@ module.exports = function( grunt ) {
             ' * Released under the <%= pkg.license %>\n' +
             ' */\n',
           mangle: {
-            except: ['jQuery']
+            except: ['jQuery', 'subarray']
           }
         }
       }
+    },
+    qunit: {
+      all: ['tests/qunit/*.html']
     }
   } );
 

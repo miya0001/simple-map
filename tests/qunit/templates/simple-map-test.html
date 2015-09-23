@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Tests for Simple Map</title>
+	<script type='text/javascript' src='http://wp.dev/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
+	<style>
+		.simplemap img
+		{
+			max-width:none !important;
+			padding:0 !important;
+			margin:0 !important;
+		}
+		.staticmap,.staticmap img
+		{
+			max-width:100% !important;height:auto !important;
+		}
+		.simplemap .simplemap-content{
+			display:none;
+		}
+
+		body
+		{
+			width: 640px;
+			margin: 20px auto;
+		}
+		div.simplemap
+		{
+			margin: 1em 0;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Tests for simple-map.js</h1>
+
+__SHORTCODES__
+
+	<script type='text/javascript' src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+	<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false'></script>
+	<script type='text/javascript' src='../../js/simple-map.min.js'></script>
+</body>
+</html>
