@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/miya0001/simple-map"
   },
+  "scripts": {
+      "test": "./node_modules/grunt-cli/bin/grunt test"
+  },
   "author": {
     "name": "Takayuki Miyauchi",
     "url": "http://wpist.me/"
@@ -18,6 +21,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-qunit": "*",
     "grunt-contrib-uglify": "~0.1.1",
