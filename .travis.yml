@@ -1,4 +1,6 @@
-language: php
+language:
+    - php
+    - node_js
 
 notifications:
   on_success: never
