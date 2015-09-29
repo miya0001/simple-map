@@ -26,9 +26,9 @@ module.exports = function( grunt ) {
             ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
             ' * Released under the <%= pkg.license %>\n' +
             ' */\n',
-          mangle: {
-            except: ['jQuery']
-          }
+            compress: {
+              drop_console: true
+            }
         }
       }
     },
@@ -58,7 +58,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
-  grunt.registerTask( 'test', ['connect','qunit'] );
+  grunt.registerTask( 'test', ['uglify', 'connect','qunit'] );
   grunt.registerTask( 'default', ['uglify'] );
 
   grunt.util.linefeed = '\n';
