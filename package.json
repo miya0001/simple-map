@@ -10,14 +10,11 @@
     "url": "https://github.com/miya0001/simple-map"
   },
   "scripts": {
-      "test": "./node_modules/grunt-cli/bin/grunt test"
+    "test": "./node_modules/grunt-cli/bin/grunt test"
   },
   "author": {
     "name": "Takayuki Miyauchi",
     "url": "http://wpist.me/"
-  },
-  "dependencies": {
-    "gmaps": "git+ssh://git@github.com:HPNeo/gmaps.git#0.4.19"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -27,5 +24,8 @@
     "grunt-contrib-uglify": "~0.1.1",
     "qunitjs": "^1.19.0"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "gmaps": "*"
+  }
 }
