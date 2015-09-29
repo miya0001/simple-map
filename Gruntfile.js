@@ -33,12 +33,32 @@ module.exports = function( grunt ) {
       }
     },
     qunit: {
-      all: ['tests/qunit/*.html']
+      all: {
+        options: {
+          timeout: 5000,
+          urls: [ 'http://localhost:8080/tests/qunit/simple-map-test.html' ],
+          page : {
+            viewportSize : { width: 1280, height: 800 }
+          }
+        }
+      }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 8080,
+          base: '.'
+        }
+      }
     }
   } );
 
   // Load other tasks
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+
+  grunt.registerTask( 'test', ['connect','qunit'] );
   grunt.registerTask( 'default', ['uglify'] );
 
   grunt.util.linefeed = '\n';
