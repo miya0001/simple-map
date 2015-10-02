@@ -8,6 +8,7 @@
 
 ```
 $ git clone https://github.com/miya0001/simple-map
+$ cd simple-map
 $ bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 $ npm install
 ```
