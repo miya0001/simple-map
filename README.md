@@ -1,6 +1,6 @@
 # Simple Map
 
-[![Build Status](https://travis-ci.org/miya0001/simple-map.svg?branch=2.7.0)](https://travis-ci.org/miya0001/simple-map)
+[![Build Status](https://travis-ci.org/miya0001/simple-map.svg)](https://travis-ci.org/miya0001/simple-map)
 [![](https://img.shields.io/wordpress/plugin/dt/simple-map.svg)](https://wordpress.org/plugins/simple-map/)
 [![](https://img.shields.io/wordpress/v/simple-map.svg)](https://wordpress.org/plugins/simple-map/)
 [![](https://img.shields.io/wordpress/plugin/r/simple-map.svg)](https://wordpress.org/plugins/simple-map/)
