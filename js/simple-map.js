@@ -20,8 +20,22 @@ SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
             zoom: parseFloat(zoom),
             streetViewControl: false,
             scrollwheel: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            width: element.style.width,
+            height: element.style.height
         });
+
+        var visible = $(element).is(':visible');
+        if (!visible) {
+            var intervalId = setInterval(function(){
+                if ($(element).is(':visible')) {
+                    clearInterval(intervalId);
+                    map.refresh();
+                    map.setCenter(pos.lat(), pos.lng());
+                }
+            }, 1000);
+        }
+
         if (infoCont.length) {
             var marker = map.addMarker({
                 lat: pos.lat(),
