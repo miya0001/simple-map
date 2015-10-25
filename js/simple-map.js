@@ -1,16 +1,37 @@
 (function($){
-
-var SimpleMap = function(element, pos, zoom, infoCont) {
+var SimpleMap = function( element ) {
     this.base_url = 'https://maps.google.com/maps?';
-    this.display(element, pos, zoom, infoCont);
+    var self = this;
+    var zoom = 16;
+    if (parseFloat($(element).data('zoom'))) {
+        zoom = $(element).data('zoom');
+    }
+    if ($(element).data('lat') && $(element).data('lng')) {
+        var lat = $(element).data('lat');
+        var lng = $(element).data('lng');
+        var infoCont = $(element).html();
+        var pos = new google.maps.LatLng(
+            lat,
+            lng
+        );
+        this.display(element, pos, zoom, infoCont);
+    } else if ($(element).data('addr').length || $(element).text().length) {
+        var address = $(element).data('addr').length ? $(element).data('addr') : $(element).text();
+        GMaps.geocode({
+            address: address,
+            callback: function(results, status) {
+                if (status == 'OK') {
+                    var pos = results[0].geometry.location;
+                    self.display(element, pos, zoom, $(element).html());
+                }
+            }
+        });
+    }
 }
 
 SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
     $(element).show();
     var breakpoint = $(element).data('breakpoint');
-    if (breakpoint > 640) {
-        breakpoint = 640;
-    }
     if ($('html').width() > breakpoint) {
         var map = new GMaps({
             div: element,
@@ -78,41 +99,7 @@ SimpleMap.prototype.display = function(element, pos, zoom, infoCont) {
 }
 
 $('.simplemap').each(function(){
-    var element = $('div', this).get(0);
-    var zoom = 16;
-    if (parseFloat($(element).data('zoom'))) {
-        zoom = $(element).data('zoom');
-    }
-    if ($(element).data('lat') && $(element).data('lng')) {
-        var lat = $(element).data('lat');
-        var lng = $(element).data('lng');
-        var infoCont = $(element).html();
-        var pos = new google.maps.LatLng(
-            lat,
-            lng
-        );
-        new SimpleMap(element, pos, zoom, infoCont);
-    } else if ($(element).data('addr')) {
-        GMaps.geocode({
-            address: $(element).data('addr'),
-            callback: function(results, status) {
-                if (status == 'OK') {
-                    var pos = results[0].geometry.location;
-                    new SimpleMap(element, pos, zoom, $(element).html());
-                }
-            }
-        });
-    } else if ($(element).text().length) {
-        GMaps.geocode({
-            address: $(element).text(),
-            callback: function(results, status) {
-                if (status == 'OK') {
-                    var pos = results[0].geometry.location;
-                    new SimpleMap(element, pos, zoom, $(element).text());
-                }
-            }
-        });
-    }
+    new SimpleMap( $('div', this).get(0) );
 });
 
 })(jQuery);
