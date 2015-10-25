@@ -128,7 +128,7 @@ You can use simple html as the tooltip content.
 
 * Display map in modal window.
 
-https://github.com/miya0001/simple-map/compare/2.6.0...2.7.0
+https://github.com/miya0001/simple-map/compare/2.7.0...2.8.0
 
 = 2.7.0 =
 
