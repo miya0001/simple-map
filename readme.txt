@@ -82,6 +82,7 @@ Please contact me.
 * [Zoltán Balogh](http://birdcreation.com/)
 * [Takanobu Watanabe](https://github.com/tknv)
 * [Shinichi Nishikawa](http://th-daily.shinichi.me/)
+* [nissuk](http://www.nissuk.info/)
 
 == Installation ==
 
