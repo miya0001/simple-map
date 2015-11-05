@@ -10,6 +10,7 @@
     "url": "https://github.com/miya0001/simple-map"
   },
   "scripts": {
+    "build": "./node_modules/grunt-cli/bin/grunt",
     "test": "grunt test"
   },
   "author": {
