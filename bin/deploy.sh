@@ -15,13 +15,13 @@ fi
 mkdir build
 
 cd build
-svn co $SVN_REPO
-git clone $GH_REF $(basename $SVN_REPO)/git
+svn co -q $SVN_REPO
+git clone -q $GH_REF $(basename $SVN_REPO)/git
 
 cd $(basename $SVN_REPO)
 SVN_ROOT_DIR=$(pwd)
 
-rsync --checksum -av $SVN_ROOT_DIR/git/ $SVN_ROOT_DIR/trunk/
+rsync --checksum -a $SVN_ROOT_DIR/git/ $SVN_ROOT_DIR/trunk/
 rm -fr $SVN_ROOT_DIR/git
 
 cd $SVN_ROOT_DIR/trunk
@@ -47,17 +47,17 @@ package.json
 phpunit.xml
 tests" > .svnignore
 
-svn propset -R svn:ignore -F .svnignore .
+svn propset -q -R svn:ignore -F .svnignore .
 
 svn propset svn:ignore -F .svnignore trunk/
-svn st | grep '^!' | sed -e 's/\![ ]*/svn del /g' | sh
-svn st | grep '^?' | sed -e 's/\?[ ]*/svn add /g' | sh
+svn st | grep '^!' | sed -e 's/\![ ]*/svn del -q /g' | sh
+svn st | grep '^?' | sed -e 's/\?[ ]*/svn add -q /g' | sh
 
 echo "Check status before commit."
 svn st
 
 if [[ $TRAVIS_TAG && $SVN_USER && $SVN_PASS ]]; then
 	echo "Commit to $SVN_REPO."
-	svn cp trunk tags/$TRAVIS_TAG
-	svn commit -q -m "commit version $TRAVIS_TAG" --username $SVN_USER --password $SVN_PASS --non-interactive 2>/dev/null
+	svn cp -q trunk tags/$TRAVIS_TAG
+	svn commit -m "commit version $TRAVIS_TAG" --username $SVN_USER --password $SVN_PASS --non-interactive 2>/dev/null
 fi
