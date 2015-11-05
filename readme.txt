@@ -125,7 +125,7 @@ You can use simple html as the tooltip content.
 
 == Changelog ==
 
-= 2.8.4 =
+= 2.8.5 =
 
 * Auto deploy
 
