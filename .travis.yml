@@ -8,8 +8,6 @@ notifications:
 
 php:
     - 5.3
-    - 5.4
-    - 5.5
     - 5.6
 
 before_script:
@@ -34,3 +32,8 @@ env:
     - SVN_REPO: https://plugins.svn.wordpress.org/simple-map/
     - GH_REF: https://github.com/miya0001/simple-map.git
     - secure: "ZNGMiXE0/uRCdIy2gNGeaQMCMWnsXy643m9U8UlNtOuUmnkrHzAiDeip/C7A/D1HZqaBFN7gILztSeJls6mR0onw1bjL4ex0Zabh0GUTIsg+5DVOvRjLvCGOMKtkHOxdT90x+QDvlTQcWvl4OMEoKrwX11dwtVxo+XG+/7BR2tQ="
+
+matrix:
+  include:
+    - php: 5.3
+      env: WP_VERSION=latest WP_MULTISITE=0 WP_PULUGIN_DEPLOY=1
