@@ -52,7 +52,6 @@ tests" > .svnignore
 
 svn propset -q -R svn:ignore -F .svnignore .
 
-svn propset svn:ignore -F .svnignore trunk/
 svn st | grep '^!' | sed -e 's/\![ ]*/svn del -q /g' | sh
 svn st | grep '^?' | sed -e 's/\?[ ]*/svn add -q /g' | sh
 
