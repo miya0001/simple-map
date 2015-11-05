@@ -26,12 +26,12 @@ mkdir build
 
 cd build
 svn co $SVN_REPO
-git clone $GH_REF $(basename $SVN_REPO)/git
+git clone $GH_REF $(basename $SVN_REPO)/.git-repo
 
 cd $(basename $SVN_REPO)
 SVN_ROOT_DIR=$(pwd)
 
-rsync -avz $SVN_ROOT_DIR/git/ $SVN_ROOT_DIR/trunk/
+rsync --checksum --delete -av $SVN_ROOT_DIR/git/ $SVN_ROOT_DIR/trunk/
 rm -fr $SVN_ROOT_DIR/git
 
 cd $SVN_ROOT_DIR/trunk
