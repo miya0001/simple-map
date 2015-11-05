@@ -26,7 +26,7 @@ mkdir build
 
 cd build
 svn co $SVN_REPO
-git clone $GH_REF $(basename $SVN_REPO)/.git-repo
+git clone $GH_REF $(basename $SVN_REPO)/git
 
 cd $(basename $SVN_REPO)
 SVN_ROOT_DIR=$(pwd)
