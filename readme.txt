@@ -4,7 +4,7 @@ Donate link: http://wpist.me/
 Tags: google maps, map, shortcode, address
 Requires at least: 3.6
 Tested up to: 4.3
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 
 Easy way to embed google map(s).
 
@@ -125,7 +125,7 @@ You can use simple html as the tooltip content.
 
 == Changelog ==
 
-= 2.8.2 =
+= 2.8.4 =
 
 * Auto deploy
 

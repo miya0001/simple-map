@@ -22,7 +22,7 @@ after_success: bash bin/deploy.sh
 
 env:
   matrix:
-    - WP_VERSION=latest WP_MULTISITE=0 WP_PULUGIN_DEPLOY=1
+    - WP_VERSION=latest WP_MULTISITE=0
     - WP_VERSION=4.2 WP_MULTISITE=0
     - WP_VERSION=4.1 WP_MULTISITE=0
     - WP_VERSION=4.0 WP_MULTISITE=0
