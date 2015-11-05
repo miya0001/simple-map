@@ -53,10 +53,11 @@ svn propset svn:ignore -F .svnignore trunk/
 svn st | grep '^!' | sed -e 's/\![ ]*/svn del /g' | sh
 svn st | grep '^?' | sed -e 's/\?[ ]*/svn add /g' | sh
 
-svn cp trunk tags/$TRAVIS_TAG
-
+echo "Check status before commit."
 svn st
 
 if [[ $TRAVIS_TAG && $SVN_USER && $SVN_PASS ]]; then
+	echo "Commit to $SVN_REPO."
+	svn cp trunk tags/$TRAVIS_TAG
 	svn commit -q -m "commit version $TRAVIS_TAG" --username $SVN_USER --password $SVN_PASS --non-interactive 2>/dev/null
 fi
