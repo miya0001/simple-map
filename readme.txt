@@ -1,10 +1,9 @@
 === Simple Map ===
 Contributors: miyauchi
-Donate link: http://wpist.me/
 Tags: google maps, map, shortcode, address
 Requires at least: 3.6
-Tested up to: 4.3
-Stable tag: 2.8.8
+Tested up to: 4.4
+Stable tag: 2.9.0
 
 Easy way to embed google map(s).
 
