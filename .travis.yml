@@ -28,7 +28,7 @@ env:
     - WP_VERSION=4.1 WP_MULTISITE=0
     - WP_VERSION=4.0 WP_MULTISITE=0
     - WP_VERSION=3.9 WP_MULTISITE=0
-    - WP_VERSION=3.8 WP_MULTISITE=0
+
   global:
     - SVN_REPO: https://plugins.svn.wordpress.org/simple-map/
     - GH_REF: https://github.com/miya0001/simple-map.git
@@ -36,5 +36,5 @@ env:
 
 matrix:
   include:
-    - php: 5.3
+    - php: 5.6
       env: WP_VERSION=latest WP_MULTISITE=0 WP_PULUGIN_DEPLOY=1

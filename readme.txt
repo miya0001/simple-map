@@ -1,7 +1,7 @@
 === Simple Map ===
 Contributors: miyauchi
 Tags: google maps, map, shortcode, address
-Requires at least: 3.6
+Requires at least: 3.9
 Tested up to: 4.4
 Stable tag: 2.10.0
 
