@@ -107,6 +107,16 @@ class Simple_Map {
 				$this->breakpoint
 			);
 		}
+		if ( ! empty( $p['map_type_control'] ) ) {
+			$map_type_control = 'true';
+		} else {
+			$map_type_control = 'false';
+		}
+		if ( ! empty( $p['map_type_id'] ) ) {
+			$map_type_id = $p['map_type_id'];
+		} else {
+			$map_type_id = 'ROADMAP';
+		}
 		if ( $content ) {
 			$content = do_shortcode( $content );
 		}
@@ -135,25 +145,27 @@ class Simple_Map {
 			$lng = $p['lng'];
 		} elseif ( isset( $p['addr'] ) && $p['addr'] ) {
 			if ( $content ) {
-				$addr = esc_html( $p['addr'] );
+				$addr = $p['addr'];
 			} else {
-				$content = esc_html( $p['addr'] );
+				$content = $p['addr'];
 			}
 		} elseif ( ! $content ) {
 			return;
 		}
 		return sprintf(
-			'<div class="%1$s"><div class="%1$s-content" data-breakpoint="%2$s" data-lat="%3$s" data-lng="%4$s" data-zoom="%5$s" data-addr="%6$s" data-infowindow="%7$s" style="width:%8$s;height:%9$s;">%10$s</div></div>',
-			apply_filters( 'simplemap_class_name', $this->class_name ),
-			$breakpoint,
-			$lat,
-			$lng,
-			$zoom,
-			$addr,
-			$infowindow,
-			$w,
-			$h,
-			trim( $content )
+			'<div class="%1$s"><div class="%1$s-content" data-breakpoint="%2$s" data-lat="%3$s" data-lng="%4$s" data-zoom="%5$s" data-addr="%6$s" data-infowindow="%7$s" data-map-type-control="%8$s" data-map-type-id="%9$s" style="width:%10$s;height:%11$s;">%12$s</div></div>',
+			esc_attr( apply_filters( 'simplemap_class_name', $this->class_name ) ),
+			esc_attr( $breakpoint ),
+			esc_attr( $lat ),
+			esc_attr( $lng ),
+			esc_attr( $zoom ),
+			esc_attr( $addr ),
+			esc_attr( $infowindow ),
+			esc_attr( $map_type_control ),
+			esc_attr( $map_type_id ),
+			esc_attr( $w ),
+			esc_attr( $h ),
+			esc_html( trim( $content ) )
 		);
 	}
 

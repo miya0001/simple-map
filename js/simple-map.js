@@ -33,15 +33,27 @@ SimpleMap.prototype.display = function( element, pos, zoom, infoCont ) {
 	$( element ).show();
 	var breakpoint = $( element ).data( 'breakpoint' );
 	if ( $( 'html' ).width() > breakpoint ) {
+		var maptypecontrol;
+		if ( 'true' == $( element ).data( 'map-type-control' ) ) {
+			maptypecontrol = true;
+		} else {
+			maptypecontrol = false;
+		}
+		var maptypeid;
+		if ( $( element ).data( 'map-type-id' ) ) {
+			maptypeid = $( element ).data( 'map-type-id' );
+		} else {
+			maptypeid = 'ROADMAP';
+		}
 		var map = new GMaps( {
 			div: element,
 			lat: pos.lat(),
 			lng: pos.lng(),
-			mapTypeControl: false,
+			mapTypeControl: maptypecontrol,
 			zoom: parseFloat( zoom ),
 			streetViewControl: false,
 			scrollwheel: false,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeId: google.maps.MapTypeId[maptypeid],
 			width: element.style.width,
 			height: element.style.height
 		} );

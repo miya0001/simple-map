@@ -7,7 +7,7 @@ class SimpleMapTest extends WP_UnitTestCase
 	 */
 	function test_address() {
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map]Osaka Japan[/map]')
 		);
 	}
@@ -25,58 +25,63 @@ class SimpleMapTest extends WP_UnitTestCase
 	function test_args() {
 		// infowindow
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="open" style="width:88px;height:99px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="open" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:88px;height:99px;">Osaka Japan</div></div>',
 			do_shortcode('[map width="88px" height="99px" infowindow="open"]Osaka Japan[/map]')
 		);
 
 		// width & height by PX
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" style="width:88px;height:99px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:88px;height:99px;">Osaka Japan</div></div>',
 			do_shortcode('[map width="88px" height="99px"]Osaka Japan[/map]')
 		);
 
 		// width & height by %
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" style="width:88%;height:99%;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:88%;height:99%;">Osaka Japan</div></div>',
 			do_shortcode('[map width="88%" height="99%"]Osaka Japan[/map]')
 		);
 
 		// zoom
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="10" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="10" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map zoom=10]Osaka Japan[/map]')
 		);
 
 		// breakpointo
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="300" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="300" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map breakpoint="300"]Osaka Japan[/map]')
 		);
 
 		// large breakpointo
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="640" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="640" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map breakpoint="3000"]Osaka Japan[/map]')
 		);
 
 		// lat and lng
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="38.8976763" data-lng="-77.03652979999998" data-zoom="16" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="38.8976763" data-lng="-77.03652979999998" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map lat="38.8976763" lng="-77.03652979999998"]Osaka Japan[/map]')
 		);
 
 		// Address and lat and lng
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="38.8976763" data-lng="-77.03652979999998" data-zoom="16" data-addr="" data-infowindow="close" style="width:100%;height:200px;">Osaka Japan</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="38.8976763" data-lng="-77.03652979999998" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Osaka Japan</div></div>',
 			do_shortcode('[map addr="Osaka Japan" lat="38.8976763" lng="-77.03652979999998"]Osaka Japan[/map]')
 		);
 
 		// Address and baloon text
 		$this->assertEquals(
-			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="Osaka Japan" data-infowindow="close" style="width:100%;height:200px;">Hello!</div></div>',
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="Osaka Japan" data-infowindow="close" data-map-type-control="false" data-map-type-id="ROADMAP" style="width:100%;height:200px;">Hello!</div></div>',
 			do_shortcode('[map addr="Osaka Japan"]Hello![/map]')
 		);
 
+		// Address and baloon text
+		$this->assertEquals(
+			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="true" data-map-type-id="SATELLITE" style="width:100%;height:200px;">Osaka, Japan</div></div>',
+			do_shortcode('[map map_type_control="true" map_type_id="SATELLITE"]Osaka, Japan[/map]')
+		);
 	 }
 
 	 /**
@@ -99,6 +104,9 @@ class SimpleMapTest extends WP_UnitTestCase
 			'[map breakpoint="100px"]Kobe, Japan[/map]',
 			'[map infowindow="open"]Kushimoto, Japan[/map]',
 			'[map infowindow="open" addr="Kushimoto, Japan" height="500px"]<h3>Hello World!</h3><p>I\'m from <a href="http://www.japan-guide.com/e/e4957.html">Kushimoto Japan</a></p>[/map]',
+			'[map map_type_control="true"]Tokyo, Japan[/map]',
+			'[map map_type_id="SATELLITE"]Tokyo, Japan[/map]',
+			'[map map_type_id="HYBRID"]Tokyo, Japan[/map]',
 			'[map addr="Osaka, Japan"]', // it should be last because there is no-close-tag
 		);
 

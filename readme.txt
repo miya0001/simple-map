@@ -3,7 +3,7 @@ Contributors: miyauchi
 Tags: google maps, map, shortcode, address
 Requires at least: 3.9
 Tested up to: 4.4
-Stable tag: 2.10.1
+Stable tag: 2.11.0
 
 Easy way to embed google map(s).
 
@@ -50,6 +50,8 @@ You can use simple html as the tooltip content.
 * lat: Lat of the map you want to place.
 * lng: Lng of the map you want to place.
 * infowindow: If you want to open infoWindow by Default, please set "open".
+* map_type_control: True or Flase.
+* map_type_id: 'ROADMAP' or 'SATELLITE' or 'HYBRID' or 'TERRAIN'.
 
 If you will set lat/lng and address, this plugin gives priority to lat/lng.
 
