@@ -19,7 +19,8 @@ $ npm run build
 
 ### Running automated testing:
 
+`npm test` runs `npm run build` and `phpunit` and `grunt test`.
+
 ```
-$ phpunit
 $ npm test
 ```

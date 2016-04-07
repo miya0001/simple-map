@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "./node_modules/grunt-cli/bin/grunt",
-    "test": "./node_modules/grunt-cli/bin/grunt test"
+    "test": "npm run build && phpunit && grunt test"
   },
   "author": {
     "name": "Takayuki Miyauchi",
