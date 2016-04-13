@@ -2,8 +2,8 @@
 Contributors: miyauchi
 Tags: google maps, map, shortcode, address
 Requires at least: 3.9
-Tested up to: 4.4
-Stable tag: 2.12.0
+Tested up to: 4.5
+Stable tag: 2.13.0
 
 Easy way to embed google map(s).
 
@@ -125,6 +125,10 @@ You can use simple html as the tooltip content.
 3. Mobile Support. (Google static map)
 
 == Changelog ==
+
+= 2.13.0 =
+
+* Tested up to WordPress 4.5
 
 = 2.12.0 =
 
