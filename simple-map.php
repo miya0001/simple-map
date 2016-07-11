@@ -31,6 +31,8 @@ class Simple_Map {
 	{
 		add_action( 'wp_head', array( $this, 'wp_head' ) );
 		add_shortcode( $this->get_shortcode_tag(), array( $this, 'shortcode' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'settings_init' ) );
 
 		wp_embed_register_handler(
 			'google-map',
@@ -55,9 +57,15 @@ class Simple_Map {
 
 	public function wp_enqueue_scripts()
 	{
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = ! empty( $options['api_key_field'] )
+			? '?key=' . esc_attr( $options['api_key_field'] )
+			: '';
+
 		wp_register_script(
 			'google-maps-api',
-			'//maps.google.com/maps/api/js',
+			'//maps.google.com/maps/api/js' . $apikey,
 			false,
 			null,
 			true
@@ -172,6 +180,137 @@ class Simple_Map {
 	private function get_shortcode_tag()
 	{
 		return apply_filters( 'simplemap_shortcode_tag', $this->shortcode_tag );
+	}
+
+
+	public function data_sanitize( $input ) {
+
+		$new_input     = array();
+
+		/**
+		 * API Key.
+		 */
+		$api_key = isset( $input['api_key_field'] ) ? $input['api_key_field'] : '';
+
+		if( ! empty( $api_key ) ) {
+
+			if( strlen( $api_key ) === mb_strlen( $api_key ) ) {
+
+				$new_input[ 'api_key_field' ] = esc_attr( $api_key );
+
+			} else {
+
+				add_settings_error(
+					'simple_map_settings',
+					'api_key_field',
+					__( 'Check your API key.', 'simple_map' ),
+					'error'
+				);
+				$new_input[ 'api_key_field' ] = '';
+
+			}
+
+		} else {
+
+			add_settings_error(
+				'simple_map_settings',
+				'api_key_field',
+				__( 'Check your API key.', 'simple_map' ),
+				'error'
+			);
+
+			$new_input['api_key_field'] = '';
+
+		}
+
+
+
+		return $new_input;
+
+	}
+
+	/**
+	 * Add admin menu
+	 */
+	public function admin_menu() {
+		add_options_page(
+			'Simple Map',
+			'Simple Map',
+			'manage_options',
+			'simple_map',
+			array( $this, 'simple_map_options_page' )
+		);
+	}
+
+	/**
+	 * Register settings.
+	 */
+	public function settings_init() {
+
+		register_setting(
+			'simplemappage',
+			'simple_map_settings',
+			array( $this, 'data_sanitize' )
+		);
+
+		add_settings_section(
+			'simple_map_settings_section',
+			__( 'Simple Map settings', 'simple_map' ),
+			array( $this, 'simple_map_settings_section_callback' ),
+			'simplemappage'
+		);
+
+		add_settings_field(
+			'api_key_field',
+			__( '<p>Set API Key</p>', 'simple_map' ),
+			array( $this, 'api_key_field_render' ),
+			'simplemappage',
+			'simple_map_settings_section'
+		);
+
+	}
+
+	/**
+	 * Add description of Post Notifier.
+	 */
+	public function simple_map_settings_section_callback() {
+
+		echo esc_attr__( 'Set your Google Maps API key.', 'simplemap' );
+
+	}
+
+	/**
+	 * Output text field.
+	 */
+	public function api_key_field_render() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = isset( $options['api_key_field'] ) ? $options['api_key_field'] : '';
+
+		?>
+
+		<input type="text" name="simple_map_settings[api_key_field]" value="<?php echo esc_html( $apikey ); ?>" size="30">
+
+		<?php
+
+	}
+
+	/**
+	 * Output Post Notifier page form.
+	 */
+	public function simple_map_options_page() {
+
+		?>
+		<form action='options.php' method='post'>
+
+			<?php
+			settings_fields( 'simplemappage' );
+			do_settings_sections( 'simplemappage' );
+			submit_button();
+			?>
+
+		</form>
+		<?php
 	}
 
 } // end class
