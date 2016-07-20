@@ -255,7 +255,7 @@ class Simple_Map {
 	public function admin_notice__error()
 	{
 
-		$class = 'notice notice-error';
+		$class = 'notice notice-warning is-dismissible';
 		$link  = sprintf(
 			'<a href="%1$s">%2$s</a>',
 			admin_url( 'options-general.php?page=simple_map' ),
@@ -265,7 +265,7 @@ class Simple_Map {
 			__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
 			$link
 		);
-		printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice notice-warning is-dismissible', $message );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
 
 	}
 
