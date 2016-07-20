@@ -6,8 +6,8 @@ Plugin URI: https://github.com/miya0001/simple-map
 Description: Insert google map convert from address.
 Version: 2.13.0
 Author URI: http://wpist.me/
+Text Domain: simple-map
 Domain Path: /languages
-Text Domain: simplemap_text
 */
 
 $simplemap = new Simple_Map();
@@ -196,7 +196,7 @@ class Simple_Map {
 
 	{
 		load_plugin_textdomain(
-			'simplemap_text',
+			'simple-map',
 			false,
 			plugin_basename( dirname( __FILE__ ) ) . '/languages'
 		);
@@ -227,7 +227,7 @@ class Simple_Map {
 				add_settings_error(
 					'simple_map_settings',
 					'api_key_field',
-					__( 'Check your API key.', 'simplemap_text' ),
+					esc_html__( 'Check your API key.', 'simple-map' ),
 					'error'
 				);
 				$new_input[ 'api_key_field' ] = '';
@@ -239,7 +239,7 @@ class Simple_Map {
 			add_settings_error(
 				'simple_map_settings',
 				'api_key_field',
-				__( 'Check your API key.', 'simplemap_text' ),
+				esc_html__( 'Check your API key.', 'simple-map' ),
 				'error'
 			);
 
@@ -259,9 +259,12 @@ class Simple_Map {
 		$link  = sprintf(
 			'<a href="%1$s">%2$s</a>',
 			admin_url( 'options-general.php?page=simple_map' ),
-			'Settings page'
+			__( 'Settings page', 'simple-map' )
 		);
-		$message = __( 'Simple Map, you need an API key. Please move to the ' . $link . '.', 'simplemap_text' );
+		$message = sprintf(
+			__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
+			$link
+		);
 		printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice notice-warning is-dismissible', $message );
 
 	}
@@ -296,7 +299,7 @@ class Simple_Map {
 
 		add_settings_section(
 			'simple_map_settings_section',
-			__( 'Simple Map settings', 'simplemap_text' ),
+			esc_html__( 'Simple Map settings', 'simple-map' ),
 			array( $this, 'simple_map_settings_section_callback' ),
 			'simplemappage'
 		);
@@ -317,7 +320,7 @@ class Simple_Map {
 	public function simple_map_settings_section_callback()
 	{
 
-		echo esc_attr__( 'Set your Google Maps API key.', 'simplemap_text' );
+		echo esc_html__( 'Set your Google Maps API key.', 'simple-map' );
 
 	}
 
@@ -351,22 +354,24 @@ class Simple_Map {
 			settings_fields( 'simplemappage' );
 			do_settings_sections( 'simplemappage' );
 
+			submit_button();
+
 			/*
 			 * API key obtaining method.
 			 */
 			$maps_api_for_web_link = sprintf(
 				'%1$s<a href="https://developers.google.com/maps/web/">%2$s</a>',
-				esc_attr__( 'Go to ', 'simple' ),
-				esc_attr__( 'Google Maps APIs for Web page.' )
+				esc_html__( 'Go to ', 'simple-map' ),
+				esc_html__( 'Google Maps APIs for Web page.' )
 			);
 
-			$get_key_text    = esc_attr__( 'Click "GET A KEY" button', 'simplemap_text' );
-			$continue_text   = esc_attr__( 'Click "CONTINUE" button', 'simplemap_text' );
-			$set_domain_text = esc_attr__( 'Add your domain.', 'simplemap_text' );
-			$copy_api_key    = esc_attr__( 'API key will pop up. Copy and paste the key.', 'simplemap_text' );
+			$get_key_text    = esc_html__( 'Click "GET A KEY" button', 'simple-map' );
+			$continue_text   = esc_html__( 'Click "CONTINUE" button', 'simple-map' );
+			$set_domain_text = esc_html__( 'Add your domain.', 'simple-map' );
+			$copy_api_key    = esc_html__( 'API key will pop up. Copy and paste the key.', 'simple-map' );
 
 			$html  = '';
-			$html .= '<h2>' . esc_attr__( 'How to get API key?', 'simplemap' ) . '</h2>';
+			$html .= '<h2>' . esc_html__( 'How to get API key?', 'simplemap' ) . '</h2>';
 			$html .= '<ol>';
 			$html .= '<li>' . $maps_api_for_web_link . '</li>';
 			$html .= '<li>' . $get_key_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/001_click_get_a_key_button.png"></p></li>';
@@ -379,7 +384,6 @@ class Simple_Map {
 
 			echo $html;
 
-			submit_button();
 		?>
 
 		</form>
