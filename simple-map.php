@@ -33,6 +33,11 @@ class Simple_Map {
 		add_shortcode( $this->get_shortcode_tag(), array( $this, 'shortcode' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
+		$option = get_option( 'simple_map_settings' );
+		$apikey = trim( $option['api_key_field'] );
+		if( ! isset( $apikey ) || empty( $apikey ) ) {
+			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
+		}
 
 		wp_embed_register_handler(
 			'google-map',
@@ -183,9 +188,27 @@ class Simple_Map {
 	}
 
 
-	public function data_sanitize( $input ) {
+	/**
+	 * Load textdomain
+	 */
+	public function load_textdomain()
 
-		$new_input     = array();
+	{
+		load_plugin_textdomain(
+			'post-notifier',
+			false,
+			plugin_basename( dirname( __FILE__ ) ) . '/languages'
+		);
+
+	}
+
+	/*
+	 * Sanitize api_key_field.
+	 */
+	public function data_sanitize( $input )
+	{
+
+		$new_input = array();
 
 		/**
 		 * API Key.
@@ -223,16 +246,31 @@ class Simple_Map {
 
 		}
 
-
-
 		return $new_input;
+
+	}
+
+
+	public function admin_notice__error()
+	{
+
+		$class = 'notice notice-error';
+		$link  = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			admin_url( 'options-general.php?page=simple_map' ),
+			'Settings page'
+		);
+		$message = __( 'Simple Map, you need an API key. Please move to the ' . $link . '.', 'simple_map' );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', 'notice notice-warning is-dismissible', $message );
 
 	}
 
 	/**
 	 * Add admin menu
 	 */
-	public function admin_menu() {
+	public function admin_menu()
+	{
+
 		add_options_page(
 			'Simple Map',
 			'Simple Map',
@@ -240,12 +278,14 @@ class Simple_Map {
 			'simple_map',
 			array( $this, 'simple_map_options_page' )
 		);
+
 	}
 
 	/**
 	 * Register settings.
 	 */
-	public function settings_init() {
+	public function settings_init()
+	{
 
 		register_setting(
 			'simplemappage',
@@ -273,7 +313,8 @@ class Simple_Map {
 	/**
 	 * Add description of Post Notifier.
 	 */
-	public function simple_map_settings_section_callback() {
+	public function simple_map_settings_section_callback()
+	{
 
 		echo esc_attr__( 'Set your Google Maps API key.', 'simplemap' );
 
@@ -282,7 +323,8 @@ class Simple_Map {
 	/**
 	 * Output text field.
 	 */
-	public function api_key_field_render() {
+	public function api_key_field_render()
+	{
 
 		$options = get_option( 'simple_map_settings' );
 		$apikey  = isset( $options['api_key_field'] ) ? $options['api_key_field'] : '';
@@ -298,7 +340,8 @@ class Simple_Map {
 	/**
 	 * Output Post Notifier page form.
 	 */
-	public function simple_map_options_page() {
+	public function simple_map_options_page()
+	{
 
 		?>
 		<form action='options.php' method='post'>
@@ -311,6 +354,7 @@ class Simple_Map {
 
 		</form>
 		<?php
+
 	}
 
 } // end class

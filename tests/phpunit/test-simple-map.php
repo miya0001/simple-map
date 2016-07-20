@@ -82,7 +82,7 @@ class SimpleMapTest extends WP_UnitTestCase
 			'<div class="simplemap"><div class="simplemap-content" data-breakpoint="480" data-lat="" data-lng="" data-zoom="16" data-addr="" data-infowindow="close" data-map-type-control="true" data-map-type-id="SATELLITE" style="width:100%;height:200px;">Osaka, Japan</div></div>',
 			do_shortcode('[map map_type_control="true" map_type_id="SATELLITE"]Osaka, Japan[/map]')
 		);
-	 }
+	 }	
 
 	 /**
 	  * Generates html file for qunit
@@ -124,4 +124,27 @@ class SimpleMapTest extends WP_UnitTestCase
 
 		$this->assertTrue( is_file( $to_file ) );
 	 }
+
+
+
+	public function test_google_maps_api() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = ! empty( $options['api_key_field'] )
+			? '?key=' . esc_attr( $options['api_key_field'] )
+			: '';
+
+		wp_register_script(
+			'google-maps-api',
+			'//maps.google.com/maps/api/js' . $apikey,
+			false,
+			null,
+			true
+		);
+
+		$this->assertTrue( wp_script_is( 'google-maps-api', 'registered' ) );
+
+	}
+
+
 }
