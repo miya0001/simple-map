@@ -342,7 +342,7 @@ class Simple_Map {
 	}
 
 	/**
-	 * Output Post Notifier page form.
+	 * Output Simple Map option page form.
 	 */
 	public function simple_map_options_page()
 	{
