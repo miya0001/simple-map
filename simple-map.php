@@ -267,6 +267,11 @@ class Simple_Map {
 	}
 
 
+	/**
+	 * Get API key.
+	 *
+	 * @return string $url Map API key.
+	 */
 	public function get_api_url() {
 
 		$options = get_option( 'simple_map_settings' );
