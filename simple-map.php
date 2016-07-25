@@ -36,7 +36,7 @@ class Simple_Map {
 		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
 		$option = get_option( 'simple_map_settings' );
 		$apikey = trim( $option['api_key_field'] );
-		if( ! isset( $apikey ) || empty( $apikey ) ) {
+		if ( ! isset( $apikey ) || empty( $apikey ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
 		}
 
@@ -66,12 +66,12 @@ class Simple_Map {
 
 		$options = get_option( 'simple_map_settings' );
 		$apikey  = ! empty( $options['api_key_field'] )
-			? '?key=' . esc_attr( $options['api_key_field'] )
+			? '?key=' . $options['api_key_field']
 			: '';
 
 		wp_register_script(
 			'google-maps-api',
-			'//maps.google.com/maps/api/js' . $apikey,
+			esc_url_raw( '//maps.google.com/maps/api/js' . $apikey ),
 			false,
 			null,
 			true
@@ -154,7 +154,7 @@ class Simple_Map {
 				esc_url( $p['url'].'&output=embed' )
 			);
 		} elseif ( isset( $p['lat'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lat'] )
-					&& isset( $p['lng'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lng'] ) ){
+		           && isset( $p['lng'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lng'] ) ){
 			$lat = $p['lat'];
 			$lng = $p['lng'];
 		} elseif ( isset( $p['addr'] ) && $p['addr'] ) {
@@ -193,7 +193,6 @@ class Simple_Map {
 	 * Load textdomain
 	 */
 	public function load_textdomain()
-
 	{
 		load_plugin_textdomain(
 			'simple-map',
@@ -259,10 +258,10 @@ class Simple_Map {
 		$link  = sprintf(
 			'<a href="%1$s">%2$s</a>',
 			admin_url( 'options-general.php?page=simple_map' ),
-			__( 'Settings page', 'simple-map' )
+			esc_html__( 'Settings page', 'simple-map' )
 		);
 		$message = sprintf(
-			__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
+			esc_html__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
 			$link
 		);
 		printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message );
@@ -306,7 +305,7 @@ class Simple_Map {
 
 		add_settings_field(
 			'api_key_field',
-			__( '<p>Set API Key</p>', 'simple_map' ),
+			esc_html__( 'Set API Key', 'simple-map' ),
 			array( $this, 'api_key_field_render' ),
 			'simplemappage',
 			'simple_map_settings_section'
@@ -342,7 +341,7 @@ class Simple_Map {
 	}
 
 	/**
-	 * Output Simple Map option page form.
+	 * Output Post Notifier page form.
 	 */
 	public function simple_map_options_page()
 	{
@@ -350,7 +349,7 @@ class Simple_Map {
 		?>
 		<form action='options.php' method='post'>
 
-		<?php
+			<?php
 			settings_fields( 'simplemappage' );
 			do_settings_sections( 'simplemappage' );
 
@@ -371,7 +370,7 @@ class Simple_Map {
 			$copy_api_key    = esc_html__( 'API key will pop up. Copy and paste the key.', 'simple-map' );
 
 			$html  = '';
-			$html .= '<h2>' . esc_html__( 'How to get API key?', 'simplemap' ) . '</h2>';
+			$html .= '<h2>' . esc_html__( 'How to get API key?', 'simple-map' ) . '</h2>';
 			$html .= '<ol>';
 			$html .= '<li>' . $maps_api_for_web_link . '</li>';
 			$html .= '<li>' . $get_key_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/001_click_get_a_key_button.png"></p></li>';
@@ -384,7 +383,7 @@ class Simple_Map {
 
 			echo $html;
 
-		?>
+			?>
 
 		</form>
 		<?php
