@@ -452,3 +452,4 @@ class Simple_Map {
 
 	}
 } // end class
+
