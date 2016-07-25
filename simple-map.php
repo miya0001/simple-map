@@ -79,6 +79,7 @@ class Simple_Map {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
 		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
+		add_action( 'admin_init', array( $this, 'get_api_url' ) );
 		$option = get_option( 'simple_map_settings' );
 		$apikey = trim( $option['api_key_field'] );
 		if ( ! isset( $apikey ) || empty( $apikey ) ) {
@@ -121,14 +122,9 @@ class Simple_Map {
 	 */
 	public function wp_enqueue_scripts() {
 
-		$options = get_option( 'simple_map_settings' );
-		$apikey  = ! empty( $options['api_key_field'] )
-			? '?key=' . $options['api_key_field']
-			: '';
-
 		wp_register_script(
 			'google-maps-api',
-			esc_url_raw( '//maps.google.com/maps/api/js' . $apikey ),
+			$this->get_api_url(),
 			false,
 			null,
 			true
@@ -267,6 +263,20 @@ class Simple_Map {
 			false,
 			plugin_basename( dirname( __FILE__ ) ) . '/languages'
 		);
+
+	}
+
+
+	public function get_api_url() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = ! empty( $options['api_key_field'] )
+			? '?key=' . $options['api_key_field']
+			: '';
+
+		$url = esc_url_raw( '//maps.google.com/maps/api/js' . $apikey );
+
+		return $url;
 
 	}
 
