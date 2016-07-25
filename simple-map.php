@@ -341,7 +341,7 @@ class Simple_Map {
 	}
 
 	/**
-	 * Output Post Notifier page form.
+	 * Output Simple Map page form.
 	 */
 	public function simple_map_options_page()
 	{
@@ -349,7 +349,7 @@ class Simple_Map {
 		?>
 		<form action='options.php' method='post'>
 
-			<?php
+		<?php
 			settings_fields( 'simplemappage' );
 			do_settings_sections( 'simplemappage' );
 
@@ -383,7 +383,7 @@ class Simple_Map {
 
 			echo $html;
 
-			?>
+		?>
 
 		</form>
 		<?php
