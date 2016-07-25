@@ -79,7 +79,6 @@ class Simple_Map {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
 		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
-		add_action( 'admin_init', array( $this, 'get_api_url' ) );
 		$option = get_option( 'simple_map_settings' );
 		$apikey = trim( $option['api_key_field'] );
 		if ( ! isset( $apikey ) || empty( $apikey ) ) {
@@ -344,10 +343,10 @@ class Simple_Map {
 			esc_html__( 'Settings page', 'simple-map' )
 		);
 		$message = sprintf(
-			esc_html__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
+			__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
 			$link
 		);
-		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
 
 	}
 
