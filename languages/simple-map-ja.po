@@ -4,62 +4,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple Map 2.13.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/simple-map\n"
-"POT-Creation-Date: 2016-07-20 07:29:04+00:00\n"
+"POT-Creation-Date: 2016-07-25 02:30:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Shuhei Nishimura <marushu3@mac.com>\n"
 
-#: simple-map.php:230 simple-map.php:242
+#: simple-map.php:229 simple-map.php:241
 msgid "Check your API key."
 msgstr "APIキーを確認してください。"
 
-#: simple-map.php:262
+#: simple-map.php:261
 msgid "Settings page"
-msgstr "設定ページへ"
+msgstr "設定ページ"
 
-#: simple-map.php:265
+#: simple-map.php:264
 msgid "Simple Map, you need an API key. Please move to the %1$s."
-msgstr "Simple MapプラグインはAPIキーが必要です。%1$s移動してください。"
+msgstr "Simple MapプラグインはGoogle Maps APIキーが必要です。%1$sへ移動して設定してください。"
 
-#: simple-map.php:302
+#: simple-map.php:301
 msgid "Simple Map settings"
-msgstr "Simple Map設定"
+msgstr ""
 
-#: simple-map.php:309
-msgid "<p>Set API Key</p>"
-msgstr "<p>APIキーを設定</p>"
+#: simple-map.php:308
+msgid "Set API Key"
+msgstr ""
 
-#: simple-map.php:323
+#: simple-map.php:322
 msgid "Set your Google Maps API key."
 msgstr "Google Maps APIキーを設定してください。"
 
-#: simple-map.php:364
+#: simple-map.php:363
 msgid "Go to "
-msgstr "次のページへ移動します。"
+msgstr "こちらのページへ移動します。"
 
-#: simple-map.php:365
+#: simple-map.php:364
 msgid "Google Maps APIs for Web page."
-msgstr ""
+msgstr "Google Maps APIs for Web ページ。."
+
+#: simple-map.php:367
+msgid "Click \"GET A KEY\" button"
+msgstr "\"キーを取得\"をクリック。"
 
 #: simple-map.php:368
-msgid "Click \"GET A KEY\" button"
-msgstr "\"キーを取得\"をクリック"
-
-#: simple-map.php:369
 msgid "Click \"CONTINUE\" button"
 msgstr "\"続ける\"をクリック。"
 
-#: simple-map.php:370
+#: simple-map.php:369
 msgid "Add your domain."
-msgstr "APIキーを使用するドメインを追加し、\"作成\"をクリック。"
+msgstr "ドメインを追加。"
 
-#: simple-map.php:371
+#: simple-map.php:370
 msgid "API key will pop up. Copy and paste the key."
-msgstr "APIキーがポップアップされるので、APIキーフィールドへコピペします。"
+msgstr "APIキーがポップアップされます。それをコピペします。"
 
-#: simple-map.php:374
+#: simple-map.php:373
 msgid "How to get API key?"
 msgstr "APIキー取得方法"
 
