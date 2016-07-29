@@ -84,13 +84,13 @@ class SimpleMapTest extends WP_UnitTestCase
 		);
 	 }
 
-	 /**
-	  * Generates html file for qunit
-	  *
-	  * @test
-	  */
-	 public function generate_test_file_for_qunit()
-	 {
+	/**
+	 * Generates html file for qunit
+	 *
+	 * @test
+	 */
+	public function generate_test_file_for_qunit()
+	{
 		$from_file = dirname( __FILE__ ) . '/../qunit/templates/simple-map-test.html';
 		$to_file = dirname( __FILE__ ) . '/../qunit/simple-map-test.html';
 
@@ -123,5 +123,31 @@ class SimpleMapTest extends WP_UnitTestCase
 		file_put_contents( $to_file, $test_content );
 
 		$this->assertTrue( is_file( $to_file ) );
-	 }
-}
+	}
+
+
+
+	public function test_google_maps_api() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = ! empty( $options['api_key_field'] )
+			? '?key=' . $options['api_key_field']
+			: '';
+
+		wp_register_script(
+			'google-maps-api',
+			esc_url_raw( '//maps.google.com/maps/api/js' . $apikey ),
+			false,
+			null,
+			true
+		);
+
+		$this->assertTrue( wp_script_is( 'google-maps-api', 'registered' ) );
+
+	}
+
+
+} // end class
+
+
+//EOF

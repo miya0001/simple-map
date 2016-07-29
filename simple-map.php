@@ -1,36 +1,89 @@
 <?php
-/*
-Plugin Name: Simple Map
-Author: Takayuki Miyauchi
-Plugin URI: https://github.com/miya0001/simple-map
-Description: Insert google map convert from address.
-Version: 2.13.0
-Author URI: http://wpist.me/
-Domain Path: /languages
-Text Domain: simplemap
-*/
+/**
+ * Plugin Name: Simple Map
+ * Author: Takayuki Miyauchi
+ * Plugin URI: https://github.com/miya0001/simple-map
+ * Description: Insert google map convert from address.
+ * Version: 2.13.0
+ * Author URI: http://wpist.me/
+ * Text Domain: simple-map
+ * Domain Path: /languages
+ * @package Simple Map
+ */
 
 $simplemap = new Simple_Map();
 
+/**
+ * Class Simple_Map
+ */
 class Simple_Map {
 
+
+	/**
+	 * Shortcode tag name.
+	 * @var string
+	 */
 	private $shortcode_tag  = 'map';
+
+	/**
+	 * Default class name.
+	 * @var string
+	 */
 	private $class_name     = 'simplemap';
+
+	/**
+	 * Default map width.
+	 * @var string
+	 */
 	private $width          = '100%';
+
+	/**
+	 * Default map height.
+	 * @var string
+	 */
 	private $height         = '200px';
+
+	/**
+	 * Default map zoom value.
+	 * @var int
+	 */
 	private $zoom           = 16;
+
+	/**
+	 * Default map box break point.
+	 * @var int
+	 */
 	private $breakpoint     = 480;
+
+	/**
+	 * Default mab box max break point.
+	 * @var int
+	 */
 	private $max_breakpoint = 640;
 
-	function __construct()
-	{
+	/**
+	 * Simple_Map constructor.
+	 */
+	function __construct() {
+
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
-	public function init()
-	{
+	/**
+	 * Init function.
+	 */
+	public function init() {
+
 		add_action( 'wp_head', array( $this, 'wp_head' ) );
 		add_shortcode( $this->get_shortcode_tag(), array( $this, 'shortcode' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'settings_init' ) );
+		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
+		$option = get_option( 'simple_map_settings' );
+		$apikey = trim( $option['api_key_field'] );
+		if ( ! isset( $apikey ) || empty( $apikey ) ) {
+			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
+		}
 
 		wp_embed_register_handler(
 			'google-map',
@@ -39,8 +92,15 @@ class Simple_Map {
 		);
 	}
 
-	public function oembed_handler( $match )
-	{
+	/**
+	 * Oembed.
+	 *
+	 * @param object $match url.
+	 *
+	 * @return string
+	 */
+	public function oembed_handler( $match ) {
+
 		return sprintf(
 			'[%s url="%s"]',
 			$this->get_shortcode_tag(),
@@ -48,16 +108,22 @@ class Simple_Map {
 		);
 	}
 
-	public function wp_head()
-	{
+	/**
+	 * Output header style and scripts.
+	 */
+	public function wp_head() {
+
 		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
 	}
 
-	public function wp_enqueue_scripts()
-	{
+	/**
+	 * Enqueue scripts.
+	 */
+	public function wp_enqueue_scripts() {
+
 		wp_register_script(
 			'google-maps-api',
-			'//maps.google.com/maps/api/js',
+			$this->get_api_url(),
 			false,
 			null,
 			true
@@ -76,8 +142,14 @@ class Simple_Map {
 		wp_enqueue_script( 'simplemap' );
 	}
 
-	public function shortcode( $p, $content = null )
-	{
+	/**
+	 * Output tags at footer.
+	 * @param array $p Width,height,zoom.
+	 * @param null  $content Content.
+	 * @return string|void
+	 */
+	public function shortcode( $p, $content = null ) {
+
 		add_action( 'wp_footer', array( &$this, 'wp_enqueue_scripts' ) );
 
 		if ( isset( $p['width'] ) && preg_match( '/^[0-9]+(%|px)$/', $p['width'] ) ) {
@@ -140,7 +212,7 @@ class Simple_Map {
 				esc_url( $p['url'].'&output=embed' )
 			);
 		} elseif ( isset( $p['lat'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lat'] )
-					&& isset( $p['lng'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lng'] ) ){
+		           && isset( $p['lng'] ) && preg_match( '/^\-?[0-9\.]+$/', $p['lng'] ) ) {
 			$lat = $p['lat'];
 			$lng = $p['lng'];
 		} elseif ( isset( $p['addr'] ) && $p['addr'] ) {
@@ -169,12 +241,229 @@ class Simple_Map {
 		);
 	}
 
-	private function get_shortcode_tag()
-	{
+	/**
+	 * Get shortcode tag.
+	 *
+	 * @return mixed|void
+	 */
+	private function get_shortcode_tag() {
+
 		return apply_filters( 'simplemap_shortcode_tag', $this->shortcode_tag );
 	}
 
+
+	/**
+	 * Load textdomain.
+	 */
+	public function load_textdomain() {
+
+		load_plugin_textdomain(
+			'simple-map',
+			false,
+			plugin_basename( dirname( __FILE__ ) ) . '/languages'
+		);
+
+	}
+
+
+	/**
+	 * Get API key.
+	 *
+	 * @return string $url Map API key.
+	 */
+	public function get_api_url() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = ! empty( $options['api_key_field'] )
+			? '?key=' . $options['api_key_field']
+			: '';
+
+		$url = esc_url_raw( '//maps.google.com/maps/api/js' . $apikey );
+
+		return $url;
+
+	}
+
+	/**
+	 * Sanitize api_key_field.
+	 *
+	 * @param string $input API key strings.
+	 *
+	 * @return array
+	 */
+	public function data_sanitize( $input ) {
+
+		$new_input = array();
+		$api_key = isset( $input['api_key_field'] ) ? $input['api_key_field'] : '';
+
+		if ( ! empty( $api_key ) ) {
+
+			if ( strlen( $api_key ) === mb_strlen( $api_key ) ) {
+
+				$new_input['api_key_field'] = esc_attr( $api_key );
+
+			} else {
+
+				add_settings_error(
+					'simple_map_settings',
+					'api_key_field',
+					esc_html__( 'Check your API key.', 'simple-map' ),
+					'error'
+				);
+				$new_input['api_key_field'] = '';
+
+			}
+		} else {
+
+			add_settings_error(
+				'simple_map_settings',
+				'api_key_field',
+				esc_html__( 'Check your API key.', 'simple-map' ),
+				'error'
+			);
+
+			$new_input['api_key_field'] = '';
+
+		}
+
+		return $new_input;
+
+	}
+
+
+	/**
+	 * Admin notice.
+	 */
+	public function admin_notice__error() {
+
+		$class = 'notice notice-warning is-dismissible';
+		$link  = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			admin_url( 'options-general.php?page=simple_map' ),
+			esc_html__( 'Settings page', 'simple-map' )
+		);
+		$message = sprintf(
+			__( 'Simple Map, you need an API key. Please move to the %1$s.', 'simple-map' ),
+			$link
+		);
+		printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
+
+	}
+
+	/**
+	 * Add admin menu.
+	 */
+	public function admin_menu() {
+
+		add_options_page(
+			'Simple Map',
+			'Simple Map',
+			'manage_options',
+			'simple_map',
+			array( $this, 'simple_map_options_page' )
+		);
+
+	}
+
+	/**
+	 * Register settings.
+	 */
+	public function settings_init() {
+
+		register_setting(
+			'simplemappage',
+			'simple_map_settings',
+			array( $this, 'data_sanitize' )
+		);
+
+		add_settings_section(
+			'simple_map_settings_section',
+			esc_html__( 'Simple Map settings', 'simple-map' ),
+			array( $this, 'simple_map_settings_section_callback' ),
+			'simplemappage'
+		);
+
+		add_settings_field(
+			'api_key_field',
+			esc_html__( 'Set API Key', 'simple-map' ),
+			array( $this, 'api_key_field_render' ),
+			'simplemappage',
+			'simple_map_settings_section'
+		);
+
+	}
+
+	/**
+	 * Add description of Post Notifier.
+	 */
+	public function simple_map_settings_section_callback() {
+
+		echo esc_html__( 'Set your Google Maps API key.', 'simple-map' );
+
+	}
+
+	/**
+	 * Output text field.
+	 */
+	public function api_key_field_render() {
+
+		$options = get_option( 'simple_map_settings' );
+		$apikey  = isset( $options['api_key_field'] ) ? $options['api_key_field'] : '';
+
+		?>
+
+		<input type="text" name="simple_map_settings[api_key_field]" value="<?php echo esc_html( $apikey ); ?>" size="30">
+
+		<?php
+
+	}
+
+	/**
+	 * Output Simple Map page form.
+	 */
+	public function simple_map_options_page() {
+
+		?>
+		<form action='options.php' method='post'>
+
+		<?php
+			settings_fields( 'simplemappage' );
+			do_settings_sections( 'simplemappage' );
+
+			submit_button();
+
+			/*
+			 * API key obtaining method.
+			 */
+			$maps_api_for_web_link = sprintf(
+				'%1$s<a href="https://developers.google.com/maps/web/">%2$s</a>',
+				esc_html__( 'Go to ', 'simple-map' ),
+				esc_html__( 'Google Maps APIs for Web page.' )
+			);
+
+			$get_key_text    = esc_html__( 'Click "GET A KEY" button', 'simple-map' );
+			$continue_text   = esc_html__( 'Click "CONTINUE" button', 'simple-map' );
+			$set_domain_text = esc_html__( 'Add your domain.', 'simple-map' );
+			$copy_api_key    = esc_html__( 'API key will pop up. Copy and paste the key.', 'simple-map' );
+
+			$html  = '';
+			$html .= '<h2>' . esc_html__( 'How to get API key?', 'simple-map' ) . '</h2>';
+			$html .= '<ol>';
+			$html .= '<li>' . $maps_api_for_web_link . '</li>';
+			$html .= '<li>' . $get_key_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/001_click_get_a_key_button.png"></p></li>';
+			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/002_click_continue_button.png"></p></li>';
+			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/004_make_project_click_continue_button.png"></p></li>';
+			$html .= '<li>' . $set_domain_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/005_add_your_domain_and_click_creating.png"></p></li>';
+			$html .= '<li>' . $copy_api_key . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/006_copy_your_api_key.png"></p></li>';
+			$html .= '</ol>';
+
+			echo $html;
+
+		?>
+
+		</form>
+		<?php
+
+	}
 } // end class
 
-
-// EOF

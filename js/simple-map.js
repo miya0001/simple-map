@@ -93,8 +93,7 @@ SimpleMap.prototype.display = function( element, pos, zoom, infoCont ) {
 			size: breakpoint + 'x' + $( element ).height(),
 			markers: [
 				{lat: pos.lat(), lng: pos.lng()}
-			],
-			sensor: 'false'
+			]
 		} );
 		var img = $( '<img />' );
 		$( img ).attr( 'src', url );
