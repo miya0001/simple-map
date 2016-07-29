@@ -4,7 +4,7 @@
  * Author: Takayuki Miyauchi
  * Plugin URI: https://github.com/miya0001/simple-map
  * Description: Insert google map convert from address.
- * Version: 2.13.0
+ * Version: 2.14.0
  * Author URI: http://wpist.me/
  * Text Domain: simple-map
  * Domain Path: /languages
@@ -274,14 +274,16 @@ class Simple_Map {
 	public function get_api_url() {
 
 		$options = get_option( 'simple_map_settings' );
-		$apikey  = ! empty( $options['api_key_field'] )
-			? '?key=' . $options['api_key_field']
-			: '';
 
-		$url = esc_url_raw( '//maps.google.com/maps/api/js' . $apikey );
+		if ( ! empty( $options['api_key_field'] ) ) {
+			$apikey  = "?key=" . $options['api_key_field']
+		} else {
+			$apikey  = "";
+		}
+
+		$url = esc_url( '//maps.google.com/maps/api/js' . $apikey );
 
 		return $url;
-
 	}
 
 	/**
@@ -412,7 +414,7 @@ class Simple_Map {
 
 		?>
 
-		<input type="text" name="simple_map_settings[api_key_field]" value="<?php echo esc_html( $apikey ); ?>" size="30">
+		<input type="text" name="simple_map_settings[api_key_field]" value="<?php echo esc_attr( $apikey ); ?>" size="30">
 
 		<?php
 
@@ -444,17 +446,15 @@ class Simple_Map {
 			$get_key_text    = esc_html__( 'Click "GET A KEY" button', 'simple-map' );
 			$continue_text   = esc_html__( 'Click "CONTINUE" button', 'simple-map' );
 			$set_domain_text = esc_html__( 'Add your domain.', 'simple-map' );
-			$copy_api_key    = esc_html__( 'API key will pop up. Copy and paste the key.', 'simple-map' );
 
 			$html  = '';
 			$html .= '<h2>' . esc_html__( 'How to get API key?', 'simple-map' ) . '</h2>';
 			$html .= '<ol>';
 			$html .= '<li>' . $maps_api_for_web_link . '</li>';
-			$html .= '<li>' . $get_key_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/001_click_get_a_key_button.png"></p></li>';
-			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/002_click_continue_button.png"></p></li>';
-			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/004_make_project_click_continue_button.png"></p></li>';
-			$html .= '<li>' . $set_domain_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/005_add_your_domain_and_click_creating.png"></p></li>';
-			$html .= '<li>' . $copy_api_key . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/006_copy_your_api_key.png"></p></li>';
+			$html .= '<li>' . $get_key_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/001.png"></p></li>';
+			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/002.png"></p></li>';
+			$html .= '<li>' . $continue_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/003.png"></p></li>';
+			$html .= '<li>' . $set_domain_text . '<p><img style="width: 80%;" src="' . plugin_dir_url( __FILE__ ) . 'images/004.png"></p></li>';
 			$html .= '</ol>';
 
 			echo $html;
@@ -466,4 +466,3 @@ class Simple_Map {
 
 	}
 } // end class
-
