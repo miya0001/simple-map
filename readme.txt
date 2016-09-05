@@ -3,7 +3,7 @@ Contributors: miyauchi
 Tags: google maps, map, shortcode, address
 Requires at least: 3.9
 Tested up to: 4.6
-Stable tag: 2.14.1
+Stable tag: 2.14.3
 
 Easy way to embed google map(s).
 
@@ -125,6 +125,10 @@ You can use simple html as the tooltip content.
 3. Mobile Support. (Google static map)
 
 == Changelog ==
+
+= 2.14.2 =
+
+* Fix API key problem on static map
 
 = 2.13.0 =
 

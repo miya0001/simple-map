@@ -4,7 +4,7 @@
  * Author: Takayuki Miyauchi
  * Plugin URI: https://github.com/miya0001/simple-map
  * Description: Insert google map convert from address.
- * Version: 2.14.1
+ * Version: 2.14.3
  * Author URI: http://wpist.me/
  * Text Domain: simple-map
  * Domain Path: /languages
