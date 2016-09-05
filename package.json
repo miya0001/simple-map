@@ -27,6 +27,6 @@
   },
   "keywords": [],
   "dependencies": {
-    "gmaps": "^0.4"
+    "gmaps": "^0.4.24"
   }
 }

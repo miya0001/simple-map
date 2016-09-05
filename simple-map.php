@@ -83,6 +83,14 @@ class Simple_Map {
 		$apikey = trim( $option['api_key_field'] );
 		if ( ! isset( $apikey ) || empty( $apikey ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
+		} else {
+			add_action( "wp_head", function() {
+				$option = get_option( 'simple_map_settings' );
+				echo sprintf(
+					"<script>var google_map_api_key = '%s';</script>",
+					esc_js( trim( $option['api_key_field'] ) )
+				);
+			} );
 		}
 
 		wp_embed_register_handler(

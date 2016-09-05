@@ -96,7 +96,7 @@ SimpleMap.prototype.display = function( element, pos, zoom, infoCont ) {
 			]
 		} );
 		var img = $( '<img />' );
-		$( img ).attr( 'src', url );
+		$( img ).attr( 'src', url + "&key=" + google_map_api_key );
 		$( img ).attr( 'alt', $( element ).text() );
 		var a = $( '<a />' );
 		$( a ).attr(
