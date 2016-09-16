@@ -4,7 +4,7 @@
  * Author: Takayuki Miyauchi
  * Plugin URI: https://github.com/miya0001/simple-map
  * Description: Insert google map convert from address.
- * Version: 2.14.3
+ * Version: 2.14.5
  * Author URI: http://wpist.me/
  * Text Domain: simple-map
  * Domain Path: /languages
@@ -83,14 +83,6 @@ class Simple_Map {
 		$apikey = trim( $option['api_key_field'] );
 		if ( ! isset( $apikey ) || empty( $apikey ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
-		} else {
-			add_action( "wp_head", function() {
-				$option = get_option( 'simple_map_settings' );
-				echo sprintf(
-					"<script>var google_map_api_key = '%s';</script>",
-					esc_js( trim( $option['api_key_field'] ) )
-				);
-			} );
 		}
 
 		wp_embed_register_handler(
@@ -122,6 +114,18 @@ class Simple_Map {
 	public function wp_head() {
 
 		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
+
+		$option = get_option( 'simple_map_settings' );
+		$apikey = trim( $option['api_key_field'] );
+		if ( isset( $apikey ) && empty( $apikey ) ) {
+			add_action( "wp_head", function() {
+				$option = get_option( 'simple_map_settings' );
+				echo sprintf(
+					"<script>var google_map_api_key = '%s';</script>",
+					esc_js( trim( $option['api_key_field'] ) )
+				);
+			} );
+		}
 	}
 
 	/**
