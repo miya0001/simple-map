@@ -4,7 +4,7 @@
  * Author: Takayuki Miyauchi
  * Plugin URI: https://github.com/miya0001/simple-map
  * Description: Insert google map convert from address.
- * Version: 2.14.5
+ * Version: 2.14.6
  * Author URI: http://wpist.me/
  * Text Domain: simple-map
  * Domain Path: /languages
@@ -118,13 +118,10 @@ class Simple_Map {
 		$option = get_option( 'simple_map_settings' );
 		$apikey = trim( $option['api_key_field'] );
 		if ( isset( $apikey ) && empty( $apikey ) ) {
-			add_action( "wp_head", function() {
-				$option = get_option( 'simple_map_settings' );
-				echo sprintf(
-					"<script>var google_map_api_key = '%s';</script>",
-					esc_js( trim( $option['api_key_field'] ) )
-				);
-			} );
+			echo sprintf(
+				"<script>var google_map_api_key = '%s';</script>",
+				esc_js( trim( $apikey ) )
+			);
 		}
 	}
 
