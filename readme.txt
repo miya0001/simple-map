@@ -3,7 +3,7 @@ Contributors: miyauchi
 Tags: google maps, map, shortcode, address
 Requires at least: 3.9
 Tested up to: 4.6
-Stable tag: 2.14.6
+Stable tag: 2.14.8
 
 Easy way to embed google map(s).
 
