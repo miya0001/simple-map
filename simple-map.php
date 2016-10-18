@@ -115,7 +115,7 @@ class Simple_Map {
 
 		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
 
-		$option = get_option( 'simple_map_settings' );
+		$option = get_option( 'simple_map_settings', array() );
 		if ( isset( $option['api_key_field'] ) && ! empty( $option['api_key_field'] ) ) {
 			printf(
 				"<script>var google_map_api_key = '%s';</script>",
