@@ -117,12 +117,10 @@ class Simple_Map {
 
 		$option = get_option( 'simple_map_settings' );
 		$apikey = trim( $option['api_key_field'] );
-		if ( isset( $apikey ) && empty( $apikey ) ) {
-			echo sprintf(
+			printf(
 				"<script>var google_map_api_key = '%s';</script>",
-				esc_js( trim( $apikey ) )
+				esc_js( $apikey )
 			);
-		}
 	}
 
 	/**
