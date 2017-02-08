@@ -16,7 +16,7 @@ before_script:
     - bash bin/build.sh
 
 script:
-    - phpunit
+    - vendor/bin/phpunit
     - npm test
 
 after_success: curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
