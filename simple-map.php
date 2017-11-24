@@ -79,8 +79,9 @@ class Simple_Map {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
 		add_action( 'admin_init', array( $this, 'load_textdomain' ) );
-		$option = get_option( 'simple_map_settings' );
-		$apikey = trim( $option['api_key_field'] );
+
+        $apikey = $this->get_api_key();
+
 		if ( ! isset( $apikey ) || empty( $apikey ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notice__error' ) );
 		}
@@ -115,11 +116,17 @@ class Simple_Map {
 
 		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
 
-		$option = get_option( 'simple_map_settings', array() );
+		if ( defined( 'GOOGLE_MAP_API_KEY' ) && GOOGLE_MAP_API_KEY ) {
+			$apikey = GOOGLE_MAP_API_KEY;
+		} else {
+			$option = get_option( 'simple_map_settings' );
+			$apikey = trim( $option['api_key_field'] );
+		}
+
 		if ( isset( $option['api_key_field'] ) && ! empty( $option['api_key_field'] ) ) {
 			printf(
 				"<script>var google_map_api_key = '%s';</script>",
-				esc_js( trim( $option['api_key_field'] ) )
+				esc_js( $apikey )
 			);
 		}
 	}
@@ -154,7 +161,7 @@ class Simple_Map {
 	 * Output tags at footer.
 	 * @param array $p Width,height,zoom.
 	 * @param null  $content Content.
-	 * @return string|void
+	 * @return string
 	 */
 	public function shortcode( $p, $content = null ) {
 
@@ -230,7 +237,7 @@ class Simple_Map {
 				$content = $p['addr'];
 			}
 		} elseif ( ! $content ) {
-			return;
+			return "";
 		}
 		return sprintf(
 			'<div class="%1$s"><div class="%1$s-content" data-breakpoint="%2$s" data-lat="%3$s" data-lng="%4$s" data-zoom="%5$s" data-addr="%6$s" data-infowindow="%7$s" data-map-type-control="%8$s" data-map-type-id="%9$s" style="width:%10$s;height:%11$s;">%12$s</div></div>',
@@ -252,13 +259,28 @@ class Simple_Map {
 	/**
 	 * Get shortcode tag.
 	 *
-	 * @return mixed|void
+	 * @return mixed
 	 */
 	private function get_shortcode_tag() {
 
 		return apply_filters( 'simplemap_shortcode_tag', $this->shortcode_tag );
 	}
 
+	/**
+	 * @return string
+	 */
+	private function get_api_key() {
+		if ( defined( 'GOOGLE_MAP_API_KEY' ) && GOOGLE_MAP_API_KEY ) {
+			return GOOGLE_MAP_API_KEY;
+		} else {
+			$option = get_option( 'simple_map_settings' );
+			if ( trim( $option['api_key_field'] ) ) {
+			    return trim( $option['api_key_field'] );
+            }
+		}
+
+		return "";
+    }
 
 	/**
 	 * Load textdomain.
@@ -280,16 +302,8 @@ class Simple_Map {
 	 * @return string $url Map API key.
 	 */
 	public function get_api_url() {
-
-		$options = get_option( 'simple_map_settings' );
-
-		if ( ! empty( $options['api_key_field'] ) ) {
-			$apikey  = "?key=" . $options['api_key_field'];
-		} else {
-			$apikey  = "";
-		}
-
-		$url = esc_url( '//maps.google.com/maps/api/js' . $apikey );
+		$apikey = $this->get_api_key();
+		$url = esc_url( '//maps.google.com/maps/api/js?key=' . $apikey );
 
 		return $url;
 	}
@@ -417,15 +431,10 @@ class Simple_Map {
 	 */
 	public function api_key_field_render() {
 
-		$options = get_option( 'simple_map_settings' );
-		$apikey  = isset( $options['api_key_field'] ) ? $options['api_key_field'] : '';
-
-		?>
-
-		<input type="text" name="simple_map_settings[api_key_field]" value="<?php echo esc_attr( $apikey ); ?>" size="30">
-
-		<?php
-
+		printf(
+		        '<input type="text" name="simple_map_settings[api_key_field]" value="%s" size="30">',
+                esc_attr( $this->get_api_key() )
+        );
 	}
 
 	/**
