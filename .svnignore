@@ -13,6 +13,7 @@ composer.lock
 node_modules
 npm-debug.log
 package.json
+package-lock.json
 phpunit.xml
 tests
 vendor
