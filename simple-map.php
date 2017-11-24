@@ -116,16 +116,11 @@ class Simple_Map {
 
 		echo "<style>.simplemap img{max-width:none !important;padding:0 !important;margin:0 !important;}.staticmap,.staticmap img{max-width:100% !important;height:auto !important;}.simplemap .simplemap-content{display:none;}</style>\n";
 
-		if ( defined( 'GOOGLE_MAP_API_KEY' ) && GOOGLE_MAP_API_KEY ) {
-			$apikey = GOOGLE_MAP_API_KEY;
-		} else {
-			$option = get_option( 'simple_map_settings' );
-			$apikey = trim( $option['api_key_field'] );
-		}
+		$apikey = $this->get_api_key();
 
-		if ( isset( $option['api_key_field'] ) && ! empty( $option['api_key_field'] ) ) {
+		if ( $apikey ) {
 			printf(
-				"<script>var google_map_api_key = '%s';</script>",
+				'<script>var google_map_api_key = "%s";</script>',
 				esc_js( $apikey )
 			);
 		}
