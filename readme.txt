@@ -2,8 +2,8 @@
 Contributors: miyauchi
 Tags: google maps, map, shortcode, address
 Requires at least: 3.9
-Tested up to: 4.7
-Stable tag: 4.7.0
+Tested up to: 4.9
+Stable tag: 4.9.0
 
 Easy way to embed google map(s).
 
